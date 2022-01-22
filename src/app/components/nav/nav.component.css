@@ -1,0 +1,13 @@
+:host nav {
+    background-color:rgba(21, 81, 109, 0.836);
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px 0 20px;
+}
+
+:host .navbar-buttons {
+    display: flex;
+    align-items: center;
+}

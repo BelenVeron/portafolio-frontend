@@ -11,6 +11,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ImageComponent } from './components/image/image.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RegisterComponent,
     IndexComponent,
     EditComponent,
-    NavComponent
+    NavComponent,
+    ImageComponent
   ],
   imports: [
     BrowserModule,

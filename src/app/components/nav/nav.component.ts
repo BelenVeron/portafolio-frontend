@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
+  textLogo: string = "Argentina Programa - #YoProgramo";
+
   constructor() { }
 
   ngOnInit(): void {

@@ -1,0 +1,19 @@
+:host div{
+    background-color: rgba(247, 247, 247, 0);
+    display: flex;
+    align-items: center;
+}
+
+:host img {
+    padding: 0.25rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    max-width: 100%;
+    height: var(--heightImg);
+}
+
+:host h6 {
+    color: white;
+    margin: 0 0 0 10px;
+    line-height: 0;
+}
