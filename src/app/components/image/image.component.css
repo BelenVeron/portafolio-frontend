@@ -2,6 +2,7 @@
     background-color: rgba(247, 247, 247, 0);
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 :host img {
@@ -16,4 +17,6 @@
     color: white;
     margin: 0 0 0 10px;
     line-height: 0;
+    font-size: 20px;
+    font-style: italic;
 }

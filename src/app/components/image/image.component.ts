@@ -10,6 +10,8 @@ export class ImageComponent implements OnInit {
   @Input() type: string = "";
   @Input() height: number = 50;
   @Input() textLogo: string = "";
+  @Input() link: string = "";
+  source: string = "";
 
   constructor() { }
 
@@ -18,29 +20,15 @@ export class ImageComponent implements OnInit {
   }
 
   addType(): void {
-    switch (this.type) {
-      case "logo":
-        this.type="/assets/images/APLogo.png";
-        break;
-      case "facebook":
-        this.type="/assets/images/facebook.png";
-        break;
-      case "youtube":
-        this.type="/assets/images/youtube.png";
-        break;
-      case "twitter":
-        this.type="/assets/images/APtwitter.png";
-        break;
-      case "linkedin":
-        this.type="/assets/images/APlinkedin.png";
-        break;
-      case "instagram":
-        this.type="/assets/images/APinstagram.png";
-        break;
-      default:
-        break;
+    this.source = `/assets/images/${this.type}.png`;
+  }
+
+  externalRedirect(): void {
+    if (this.type === 'logo') {
+      window.open("https://www.argentina.gob.ar/produccion/transformacion-digital-y-economia-del-conocimiento/argentina-programa", "_blank")
+    } else {
+      window.open(this.link, "_blank")
     }
-    
   }
 
 }

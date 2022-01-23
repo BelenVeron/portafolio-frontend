@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ImageComponent } from './components/image/image.component';
+import { ResponsiveDirective } from './directives/responsive.directive';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ImageComponent } from './components/image/image.component';
     IndexComponent,
     EditComponent,
     NavComponent,
-    ImageComponent
+    ImageComponent,
+    ResponsiveDirective
   ],
   imports: [
     BrowserModule,

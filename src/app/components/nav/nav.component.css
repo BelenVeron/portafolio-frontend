@@ -11,3 +11,17 @@
     display: flex;
     align-items: center;
 }
+
+:host .toggle {
+    display: none;
+}
+
+@media only screen and (max-width: 900px) {
+    :host .navbar-buttons {
+        display: none;
+    }
+
+    :host .toggle {
+        display: block;
+    }
+}
