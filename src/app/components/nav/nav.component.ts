@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenService } from 'src/app/services/auth/token.service';
 
 @Component({
   selector: 'app-nav',
@@ -8,10 +9,18 @@ import { Component, OnInit } from '@angular/core';
 export class NavComponent implements OnInit {
 
   textLogo: string = "Argentina Programa - #YoProgramo";
+  isLogged = false;
+  isAdmin = false;
 
-  constructor() { }
+  constructor(private tokenService: TokenService) { }
 
   ngOnInit(): void {
+    this.isLogged = this.tokenService.isLogged();
+    this.isAdmin = this.tokenService.isAdmin();
+  }
+
+  onLogOut(): void {
+    this.tokenService.logout();
   }
 
 }
