@@ -16,6 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ImageComponent } from './components/image/image.component';
 import { ResponsiveDirective } from './directives/responsive.directive';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ResponsiveDirective } from './directives/responsive.directive';
     HttpClientModule,
     FormsModule,
     ToastrModule.forRoot(),
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

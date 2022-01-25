@@ -1,2 +1,22 @@
 <app-nav></app-nav>
-Login
+
+<div class="overlay">
+    <form #f="ngForm" (ngSubmit)="onLogin()" novalidate>
+       <div class="container">
+            <header class="head-form">
+                <h2>Log In</h2>
+                <p>Login to edit the portafolio</p>
+            </header>
+            
+            <div class="field-set">
+                <input class="form-input" placeholder="username" type="text" name="username" id="username" [(ngModel)]="username" required>
+
+                <input class="form-input" placeholder="password" type="password" name="password" id="password" [(ngModel)]="password" required>
+         
+                <button class="btn submits" [disabled]="!f.valid" type="submit"> Log In </button>
+            </div>
+      
+      </div>
+      
+    </form>
+</div>
