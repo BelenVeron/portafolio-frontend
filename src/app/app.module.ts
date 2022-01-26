@@ -17,6 +17,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ImageComponent } from './components/image/image.component';
 import { ResponsiveDirective } from './directives/responsive.directive';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HeroComponent } from './components/hero/hero.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     EditComponent,
     NavComponent,
     ImageComponent,
-    ResponsiveDirective
+    ResponsiveDirective,
+    HeroComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

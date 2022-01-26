@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,400,800,900&display=swap');
+
+
+
+:host .hero {
+    
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-family: 'Poppins', sans-serif;
+    height: 500px;
+    width: 100%;
+
+    
+}
+
+:host .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 2, 3, 0.452);
+    background: linear-gradient(220deg, rgba(19, 58, 83, 0.404) 0%, rgba(40, 197, 208, 0.377) 100%);
+}
+
+:host .overlay ::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #06796fad;
+    z-index: 3;
+    animation: reveal .5s reverse forwards;
+    animation-delay: .5s;
+    transform-origin: right;
+}
+
+:host .overlay ::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #133A53;
+    z-index: 2;
+    animation: reveal 0.7s reverse forwards;
+    animation-delay: .7s;
+    transform-origin: left;
+}
+
+:host .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 500px;
+    width: 100%;
+    margin: auto;
+    transform-origin: left;
+    animation: reveal 1s ease-in-out forwards;
+
+}
+
+:host .content h1 {
+    font-size: 90px;
+    line-height: 0.9;
+    margin-left: 80px;
+    color: white;
+    text-shadow: 2px 3px rgba(128, 128, 128, 0.699);
+}
+
+:host .content p {
+    font-size: 24px;
+    color: white;
+    margin-left: 40px;
+    text-shadow: 2px 2px rgba(128, 128, 128, 0.699);
+}
+
+@keyframes reveal {
+    0% {
+        transform: scaleX(0);
+    }
+
+    100% {
+        transform: scaleX(1);
+    }
+}
