@@ -19,6 +19,7 @@ import { ResponsiveDirective } from './directives/responsive.directive';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HeroComponent } from './components/hero/hero.component';
 import { AboutComponent } from './components/about/about.component';
+import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AboutComponent } from './components/about/about.component';
     ImageComponent,
     ResponsiveDirective,
     HeroComponent,
-    AboutComponent
+    AboutComponent,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,

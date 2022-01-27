@@ -6,14 +6,23 @@
     <div class="toggle">
         <button type="submit">Toggle</button>
     </div>
-    
+
     <div class="navbar-buttons">
         <app-image type="instagram" [height]=30 link="https://www.instagram.com"></app-image>
         <app-image type="facebook" [height]=30 link="https://www.facebook.com"></app-image>
         <app-image type="twitter" [height]=30 link="https://www.twitter.com"></app-image>
         <app-image type="youtube" [height]=30 link="https://www.youtube.com"></app-image>
         <app-image type="linkedin" [height]=30 link="https://www.linkedin.com"></app-image>
-        <button *ngIf="!isLogged" routerLink="/login" type="submit">Login</button>
-        <button *ngIf="isLogged" (click)="onLogOut()" routerLink="/login" type="reset">Logout</button>
+        <app-button 
+            text="Login" 
+            *ngIf="!isLogged" 
+            routerLink="/login" 
+        ></app-button>
+        <app-button 
+            text="Logout" 
+            *ngIf="isLogged" 
+            (click)="onLogOut()" 
+            routerLink="/login" 
+        ></app-button>
     </div>
 </nav>

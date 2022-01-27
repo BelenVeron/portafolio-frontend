@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { catchError, map, Observable } from 'rxjs';
+import { PersonalInformation } from 'src/app/models/crud/personal-information';
+import { TokenService } from 'src/app/services/auth/token.service';
+import { PersonalInformationService } from 'src/app/services/personal-information/personal-information.service';
 
 @Component({
   selector: 'app-about',
@@ -7,14 +12,71 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
-  source: string = '/assets/images/profile.png'
-  name: string = 'Name';
-  degree: string = 'Degree';
-  summary: string = 'Aute velit aute deserunt enim anim aliqua laborum ex nisi consequat. Nisi deserunt laboris ad irure sint duis culpa aliquip. Veniam aliqua qui nostrud aliqua Lorem proident quis. Nulla est officia ex voluptate consequat adipisicing esse consequat voluptate ut aliqua ex aliquip.'
+  source: string = ''
 
-  constructor() { }
+  personalInformation!: PersonalInformation;
+  isAdmin = false;
+  httpClient: any;
+
+  constructor(
+    private personalInformationService: PersonalInformationService,
+    private toastr: ToastrService,
+    private tokenService: TokenService
+    ) { }
 
   ngOnInit(): void {
+    this.getpersonalInformations();
+    this.isAdmin = this.tokenService.isAdmin();
   }
+
+  getpersonalInformations(): void {
+    this.personalInformationService.get().subscribe(
+      data => {
+        this.personalInformation = data;
+        this.setSource(this.personalInformation);
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+  
+  setSource(data: PersonalInformation){
+    this.source = `/assets/images/${data.picture}.png`;
+    console.log(this.source)
+  }
+  
+  onUpdate(): void {
+    this.personalInformationService.update(this.personalInformation).subscribe(
+      data => {
+        this.toastr.success('personalInformation update', 'OK', {
+          timeOut: 3000
+        });
+      },
+      err => {
+        console.log('error',err);
+        this.toastr.error(err.error.mensaje, 'Fail', {
+          timeOut: 3000
+        });
+      }
+    )
+  }
+
+  delete(id: number, personalInformation: PersonalInformation) {
+    this.personalInformationService.delete(id, personalInformation).subscribe(
+      data => {
+        this.toastr.success('personalInformation delete', 'OK', {
+          timeOut: 3000
+        });
+        this.getpersonalInformations();
+      },
+      err => {
+        this.toastr.error(err.error.message, 'Fail', {
+          timeOut: 3000
+        });
+      }
+    )
+  }
+
 
 }

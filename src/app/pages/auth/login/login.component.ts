@@ -27,13 +27,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     
   }
-
+  
   onLogin(): void {
     this.userLogin = new UserLogin(this.username, this.password);
     this.authService.login(this.userLogin).subscribe(
       data => {
         this.tokenService.setToken(data.token);
-        this.router.navigate(['/']);
+        this.router.navigate(['/edit']);
       },
       err => {
         this.toastr.error(err.error.message, 'Fail', {

@@ -3,7 +3,6 @@
 
 
 :host .hero {
-    
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -14,11 +13,9 @@
     font-family: 'Poppins', sans-serif;
     height: 500px;
     width: 100%;
-
-    
 }
 
-:host .overlay {
+:host .container {
     position: absolute;
     top: 0;
     left: 0;
@@ -34,9 +31,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: #06796fad;
+    background: #135a5449;
     z-index: 3;
-    animation: reveal .5s reverse forwards;
+    animation: reveal 0.5s reverse forwards;
     animation-delay: .5s;
     transform-origin: right;
 }
@@ -48,7 +45,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: #133A53;
+    background: #133a534d;
     z-index: 2;
     animation: reveal 0.7s reverse forwards;
     animation-delay: .7s;
@@ -63,7 +60,7 @@
     width: 100%;
     margin: auto;
     transform-origin: left;
-    animation: reveal 1s ease-in-out forwards;
+    animation: reveal 3s ease-in-out forwards;
 
 }
 

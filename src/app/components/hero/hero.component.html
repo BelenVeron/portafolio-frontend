@@ -1,5 +1,5 @@
 <div class="hero" [ngStyle]="{'background-image': 'url(assets/images/' + heroUrl + ')'}">
-    <div class="overlay">
+    <div [ngClass]="'container ' + animation">
         <div class="content">
           <h1>Creative <br>Solutions.</h1>
           <p>We create custom personal and corporate WordPress websites!!</p>

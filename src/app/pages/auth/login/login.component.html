@@ -13,7 +13,15 @@
 
                 <input class="form-input" placeholder="password" type="password" name="password" id="password" [(ngModel)]="password" required>
          
-                <button class="btn submits" [disabled]="!f.valid" type="submit"> Log In </button>
+                <app-button 
+                    text="Login" 
+                    routerLink="/login"
+                    [disabled]="!f.valid"
+                    type="submit"
+                    width="120"
+                    height="50"
+                    [ngStyle]="{'margin-top.px':40}"
+                ></app-button>
             </div>
       
       </div>

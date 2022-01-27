@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Alegreya|Arima+Madurai|Dancing+Script|Dosis|Merriweather|Oleo+Script|Overlock|PT+Serif|Pacifico|Playball|Playfair+Display|Share|Unica+One|Vibur');
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #252537;
+  
+    padding: 0 20px;
+    background: #fff;
+    border-radius: 5px;
+    
+    outline: none;
+    border: none;
+  
+    cursor: pointer;
+    transition: all 0.2s linear;
+    
+    margin: 7% auto;
+    letter-spacing: 0.15em;
+
+    
+    width: var(--width-btn);
+    height: var(--height-btn);
+    background: #B8F2E6;
+}
+
+
+/* .btns hover */
+.btn:hover {
+    transform: translatey(3px);
+    box-shadow: none;
+}
+
+/* .btns hover Animation */
+.btn:hover {
+    animation: ani9 0.4s ease-in-out infinite alternate;
+}
+@keyframes ani9 {
+    0% {
+        transform: translateY(3px);
+    }
+    100% {
+        transform: translateY(5px);
+    }
+}
+
+.btn h3 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Playfair Display', serif;
+    color: #3e403f;
+    font-size: 90%;
+}

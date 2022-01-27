@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false, 
-  authURL: 'http://localhost:8080/auth/'
+  authURL: 'http://localhost:8080/auth/',
+  personalInformationURL: 'http://localhost:8080/personalInformation/'
 };
 
 /*
