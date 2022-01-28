@@ -1,13 +1,27 @@
 <div class="wrapper">
-    <div class="blog-post">
-      <div class="img-pod">
-        <img [src]="source" >
+  <div class="blog-post">
+    <div class="img-pod">
+      <div class="image">
+        <img [src]="source">
+        <app-button *ngIf="isAdmin" type="edit" width="40" height="50">
+        </app-button>
+      </div>
+      <div class="description">
+        <app-button *ngIf="isAdmin" type="edit" width="40" height="50">
+        </app-button>
         <h3>{{personalInformation.name}}</h3>
         <h3>{{personalInformation.degree}}</h3>
       </div>
-      <div class="container-text">
-        <h1>Información profesional</h1>
-        <p>{{personalInformation.summary}}</p>
-      </div>
     </div>
+    <div class="container-text">
+      <h1>Información profesional</h1>
+      <div class="buttons">
+        <app-button *ngIf="isAdmin" type="edit" width="40" height="50">
+        </app-button>
+        <app-button *ngIf="isAdmin" type="delete" width="40" height="50">
+        </app-button>
+      </div>
+      <p>{{personalInformation.summary}}</p>
+    </div>
+  </div>
 </div>

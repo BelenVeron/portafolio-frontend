@@ -1,0 +1,8 @@
+<input 
+    class="form-input" 
+    [placeholder]="type" 
+    [type]="type" 
+    #newValue 
+    (keyup)="addValue(newValue.value)"
+    [required]="required"
+    />

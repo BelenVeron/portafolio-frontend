@@ -22,14 +22,19 @@
     display: flex;
     flex-direction: column;
     text-align: center;
+    position: relative;
+    left: 10%;
+    transform: translate(-50%, -15%);
+}
+
+.image {
+    display: flex;
+    margin: 0px 0px 2.5rem 4rem;
 }
 
 img {
     height: 100px;
     width: 100px;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, -50%);
     border-radius: 100%;
     box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
     border: solid #ff5e62 5px;
@@ -54,4 +59,9 @@ p {
     margin: 0 0 4.5rem 0;
     font-size: 1.5rem;
     color: #333;
+}
+
+.buttons {
+    display: flex;
+    justify-content: right;
 }
