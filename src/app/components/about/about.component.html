@@ -1,16 +1,16 @@
 <div class="wrapper">
   <div class="blog-post">
     <div class="img-pod">
-      <div class="image">
+      <div [ngClass]="{'image': isAdmin}">
         <img [src]="source">
         <app-button *ngIf="isAdmin" type="edit" width="40" height="50">
         </app-button>
       </div>
       <div class="description">
-        <app-button *ngIf="isAdmin" type="edit" width="40" height="50">
+        <app-button *ngIf="isAdmin" type="edit" width="40" height="50" (click)="onUpdate()">
         </app-button>
-        <h3>{{personalInformation.name}}</h3>
-        <h3>{{personalInformation.degree}}</h3>
+        <app-input (newValueEvent)="addName($event)" classInput="information" [value]="personalInformation.name" [type]="personalInformation.name" [disabled]="!isAdmin"></app-input>
+        <app-input classInput="information" [value]="personalInformation.degree" [type]="personalInformation.degree" [disabled]="!isAdmin"></app-input>
       </div>
     </div>
     <div class="container-text">
@@ -21,7 +21,7 @@
         <app-button *ngIf="isAdmin" type="delete" width="40" height="50">
         </app-button>
       </div>
-      <p>{{personalInformation.summary}}</p>
+      <app-textarea classInput="information" [value]="personalInformation.summary" [disabled]="!isAdmin"></app-textarea>
     </div>
   </div>
 </div>

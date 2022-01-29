@@ -21,6 +21,8 @@ import { HeroComponent } from './components/hero/hero.component';
 import { AboutComponent } from './components/about/about.component';
 import { ButtonComponent } from './components/button/button.component';
 import { InputComponent } from './components/input/input.component';
+import { interceptorProvider } from './interceptors/edit/edit.interceptor';
+import { TextareaComponent } from './components/textarea/textarea.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { InputComponent } from './components/input/input.component';
     AboutComponent,
     ButtonComponent,
     InputComponent,
+    TextareaComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,7 @@ import { InputComponent } from './components/input/input.component';
     ToastrModule.forRoot(),
     FontAwesomeModule,
   ],
-  providers: [],
+  providers: [interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

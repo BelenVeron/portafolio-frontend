@@ -14,8 +14,7 @@
 }
 
 .container-text {
-    padding-left: 10%;
-    width: 70%;
+    width: 100%;
 }
 
 .img-pod {
@@ -29,7 +28,7 @@
 
 .image {
     display: flex;
-    margin: 0px 0px 2.5rem 4rem;
+    margin: 0 0 0 8rem;
 }
 
 img {
@@ -40,28 +39,18 @@ img {
     border: solid #ff5e62 5px;
 }
 
-h3 {
-    margin: 0 0 0.5rem 0;
-    color: #999;
-    font-size: 1.25rem;
-    position: relative;
-    bottom: 10%;
-}
-
 h1 {
-    margin: 0 0 1rem 0;
+    margin: 0 0 0.5rem 0;
     font-size: 2.5rem;
     letter-spacing: 0.5px;
-    color: #333;
-}
-
-p {
-    margin: 0 0 4.5rem 0;
-    font-size: 1.5rem;
     color: #333;
 }
 
 .buttons {
     display: flex;
     justify-content: right;
+}
+
+.description {
+    margin-top: 3rem;
 }

@@ -1,0 +1,16 @@
+.form-textarea:disabled {
+    font-size: 1.5rem;
+    color: #333;
+    overflow:hidden;
+    background-color: white;
+    border: none;
+}
+
+.form-textarea {
+    font-size: 1.5rem;
+    color: #333;
+    overflow:hidden;
+    background-color: white;
+    border: black solid 1px;
+    padding: 20px;
+}

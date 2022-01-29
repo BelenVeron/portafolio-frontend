@@ -9,8 +9,8 @@
             </header>
 
             <div class="field-set">
-                <app-input type="username" (newValueEvent)="addUsername($event)" [required]="true"></app-input>
-                <app-input [ngStyle]="{'margin-top.px':10}" type="password" (newValueEvent)="addPassword($event)"
+                <app-input type="username" placeholder="Username" (newValueEvent)="addUsername($event)" [required]="true"></app-input>
+                <app-input [ngStyle]="{'margin-top.px':10}" type="password" placeholder="Password" (newValueEvent)="addPassword($event)"
                     [required]="true"></app-input>
 
                 <div class="buttons">

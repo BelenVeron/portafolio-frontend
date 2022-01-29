@@ -1,0 +1,4 @@
+<textarea [ngClass]="classTextarea" [rows]="rows" [cols]="cols" #newValue (keyup)="addValue(newValue.value)" [required]="required"
+    [disabled]="disabled" [value]="value">
+{{text}}
+</textarea>

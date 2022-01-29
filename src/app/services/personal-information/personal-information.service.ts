@@ -22,7 +22,7 @@ export class PersonalInformationService {
   }
 
   public update(personalInformation: PersonalInformation): Observable<any> {
-    return this.httpClient.put<any>(this.personalInformationURL + `update/`, personalInformation);
+    return this.httpClient.put<any>(this.personalInformationURL + 'update/', personalInformation);
   }
 
   public delete(id:number, personalInformation: PersonalInformation): Observable<any> {

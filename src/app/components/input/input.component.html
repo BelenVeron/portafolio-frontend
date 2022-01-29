@@ -1,8 +1,11 @@
-<input 
-    class="form-input" 
-    [placeholder]="type" 
+<input
+    [class]="classInput" 
+    [placeholder]="placeholder" 
     [type]="type" 
     #newValue 
     (keyup)="addValue(newValue.value)"
     [required]="required"
+    [disabled]="disabled"
+    [value]="value"
+    [ngStyle]="{'width.px': width}"
     />

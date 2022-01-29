@@ -16,7 +16,6 @@ export class AboutComponent implements OnInit {
 
   personalInformation!: PersonalInformation;
   isAdmin = false;
-  httpClient: any;
 
   constructor(
     private personalInformationService: PersonalInformationService,
@@ -27,6 +26,10 @@ export class AboutComponent implements OnInit {
   ngOnInit(): void {
     this.getpersonalInformations();
     this.isAdmin = this.tokenService.isAdmin();
+  }
+
+  addName(value: string) {
+    this.personalInformation.name = value;
   }
 
   getpersonalInformations(): void {
@@ -42,11 +45,13 @@ export class AboutComponent implements OnInit {
   }
   
   setSource(data: PersonalInformation){
-    this.source = `/assets/images/${data.picture}.png`;
+    //this.source = `/assets/images/${data.picture}.png`;
+    this.source = `/assets/images/profile.png`;
     console.log(this.source)
   }
   
   onUpdate(): void {
+    console.log(this.personalInformation)
     this.personalInformationService.update(this.personalInformation).subscribe(
       data => {
         this.toastr.success('personalInformation update', 'OK', {
@@ -55,9 +60,9 @@ export class AboutComponent implements OnInit {
       },
       err => {
         console.log('error',err);
-        this.toastr.error(err.error.mensaje, 'Fail', {
+        /* this.toastr.error(err.error.message, 'Fail', {
           timeOut: 3000
-        });
+        }); */
       }
     )
   }
