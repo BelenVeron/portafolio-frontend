@@ -21,7 +21,6 @@ export class ResponsiveDirective {
 
   @HostListener('window:resize', ['$event'])
   onResize(event: { target: { innerWidth: Number } }) {
-    console.log('Width: ' + event.target.innerWidth);
     if (event.target.innerWidth < 400) this.highlight('red');
     else this.highlight('yellow');
   }

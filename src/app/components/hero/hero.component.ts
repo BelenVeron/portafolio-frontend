@@ -20,7 +20,6 @@ export class HeroComponent implements OnInit {
   }
 
   setAnimation(): void {
-    console.log('repeat')
     if(this.activeAnimation) {
       this.animation = 'overlay';
       this.activeAnimation = false;

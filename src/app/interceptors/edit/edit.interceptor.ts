@@ -35,7 +35,6 @@ export class EditInterceptor implements HttpInterceptor {
     intReq = this.addToken(req, token);
 
     return next.handle(intReq).pipe(catchError((err: HttpErrorResponse) => {
-      console.log('interceptor');
       if (err.status === 401) {
         const dto: JwtDto = new JwtDto(this.tokenService.getToken());
         return this.authService.refresh(dto).pipe(concatMap((data: any) => {

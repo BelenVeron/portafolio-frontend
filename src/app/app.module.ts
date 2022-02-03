@@ -23,6 +23,10 @@ import { ButtonComponent } from './components/button/button.component';
 import { InputComponent } from './components/input/input.component';
 import { interceptorProvider } from './interceptors/edit/edit.interceptor';
 import { TextareaComponent } from './components/textarea/textarea.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,8 @@ import { TextareaComponent } from './components/textarea/textarea.component';
     ButtonComponent,
     InputComponent,
     TextareaComponent,
+    FileUploadComponent,
+    ImageUploadComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +55,8 @@ import { TextareaComponent } from './components/textarea/textarea.component';
     FormsModule,
     ToastrModule.forRoot(),
     FontAwesomeModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent]
