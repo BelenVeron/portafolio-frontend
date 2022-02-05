@@ -27,6 +27,7 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SkillComponent } from './components/skill/skill.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TextareaComponent,
     FileUploadComponent,
     ImageUploadComponent,
+    SkillComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,32 @@
+<div class="title">
+    <h1>Hard & Soft Skills</h1>
+    <app-button *ngIf="isAdmin" type="add" width="40" height="50" (click)="addSkill()">
+    </app-button>
+</div>
+<div class="container">
+    <div *ngFor="let skill of skills">
+        <div class="buttons">
+            <app-button *ngIf="isAdmin" type="edit" width="40" height="50" (click)="onUpdate(skill)">
+            </app-button>
+            <app-button *ngIf="isAdmin" type="delete" width="40" height="50" (click)="delete(skill.id)">
+            </app-button>
+        </div>
+        <div class="card">
+            <div class="box">
+                <div class="percent">
+                    <svg *ngIf="!isAdmin">
+                        <circle cx="70" cy="70" r="70"></circle>
+                        <circle [style.--percent]="skill.percent" cx="70" cy="70" r="70"></circle>
+                    </svg>
+                    <div class="num">
+                        <app-input *ngIf="skill" (newValueEvent)="addPercent($event, skill.id)" classInput="information"
+                            [value]="(isAdmin)?skill.percent.toString():skill.percent.toString()+'%'"
+                            [type]="'text'" [disabled]="!isAdmin" [typeNum]="true" [maxlenght]="maxlenght"></app-input>
+                    </div>
+                </div>
+                <app-input *ngIf="skill" (newValueEvent)="addName($event, skill.id)" classInput="information"
+                    [value]="skill.name" [type]="'text'" [disabled]="!isAdmin"></app-input>
+            </div>
+        </div>
+    </div>
+</div>

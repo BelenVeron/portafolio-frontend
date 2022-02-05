@@ -29,13 +29,7 @@ export class PersonalInformationService {
     return this.httpClient.put<any>(this.personalInformationURL + 'update/' + this.tokenService.getUsername(), personalInformation);
   }
 
-  public delete(id:number, personalInformation: PersonalInformation): Observable<any> {
-    const options = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-      body: personalInformation,
-    };
-    return this.httpClient.delete<any>(this.personalInformationURL + `delete}`, options);
+  public delete(personalInformation: PersonalInformation): Observable<any> {
+    return this.httpClient.delete<any>(this.personalInformationURL + `delete${personalInformation.id}`);
   }
 }

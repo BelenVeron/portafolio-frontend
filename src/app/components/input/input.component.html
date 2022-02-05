@@ -3,9 +3,11 @@
     [placeholder]="placeholder" 
     [type]="type" 
     #newValue 
-    (keyup)="addValue(newValue.value)"
+    (keyup)="addValue(newValue.value, $event)"
     [required]="required"
     [disabled]="disabled"
     [value]="value"
+    [attr.maxlength]="maxlenght"
     [ngStyle]="{'width.px': width}"
+    [(ngModel)]="value"
     />

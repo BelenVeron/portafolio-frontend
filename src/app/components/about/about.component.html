@@ -21,9 +21,9 @@
     <div class="container-text">
       <h1>Información profesional</h1>
       <div class="buttons">
-        <app-button *ngIf="isAdmin" type="edit" width="40" height="50">
+        <app-button *ngIf="isAdmin" type="edit" width="40" height="50" (click)="onUpdate()">
         </app-button>
-        <app-button *ngIf="isAdmin" type="delete" width="40" height="50">
+        <app-button *ngIf="isAdmin" type="delete" width="40" height="50" (click)="delete()">
         </app-button>
       </div>
       <app-textarea *ngIf="personalInformation" classInput="information" [value]="personalInformation.summary"

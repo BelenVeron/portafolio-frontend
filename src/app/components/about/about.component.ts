@@ -82,7 +82,7 @@ export class AboutComponent implements OnInit {
   }
   
   onUpdate(): void {
-    this.personalInformationService.update(this.personalInformation).subscribe(
+    this.personalInformationService.save(this.personalInformation).subscribe(
       data => {
         this.toastr.success('personalInformation update', 'OK', {
           timeOut: 3000
@@ -97,8 +97,8 @@ export class AboutComponent implements OnInit {
     )
   }
 
-  delete(id: number, personalInformation: PersonalInformation) {
-    this.personalInformationService.delete(id, personalInformation).subscribe(
+  delete() {
+    this.personalInformationService.delete(this.personalInformation).subscribe(
       data => {
         this.toastr.success('personalInformation delete', 'OK', {
           timeOut: 3000
