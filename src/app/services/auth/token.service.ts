@@ -31,7 +31,7 @@ export class TokenService {
 
   public getUsername(): string {
     if (!this.isLogged()) {
-      return null!;
+      return "Fran";
     }
     
     const token = this.getToken();

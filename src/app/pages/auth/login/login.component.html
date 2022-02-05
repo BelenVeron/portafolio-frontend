@@ -2,29 +2,26 @@
 
 <div class="overlay">
     <form #f="ngForm" (ngSubmit)="onLogin()" novalidate>
-       <div class="container">
+        <div class="container">
             <header class="head-form">
                 <h2>Log In</h2>
-                <p>Login to edit the portafolio</p>
+                <p>Login para editar el portafolio</p>
             </header>
-            
-            <div class="field-set">
-                <input class="form-input" placeholder="username" type="text" name="username" id="username" [(ngModel)]="username" required>
 
-                <input class="form-input" placeholder="password" type="password" name="password" id="password" [(ngModel)]="password" required>
-         
-                <app-button 
-                    text="Login" 
-                    routerLink="/login"
-                    [disabled]="!f.valid"
-                    type="submit"
-                    width="120"
-                    height="50"
-                    [ngStyle]="{'margin-top.px':40}"
-                ></app-button>
+            <div class="field-set">
+                <app-input type="username" placeholder="Username" (newValueEvent)="addUsername($event)" [required]="true"></app-input>
+                <app-input [ngStyle]="{'margin-top.px':10}" type="password" placeholder="Password" (newValueEvent)="addPassword($event)"
+                    [required]="true"></app-input>
+
+                <div class="buttons">
+                    <app-button text="Login" routerLink="/login" [disabled]="!f.valid" type="submit" width="120"
+                        height="45" [ngStyle]="{'margin-right.px':10}"></app-button>
+                    <app-button text="Volver" routerLink="/" type="submit" width="120" height="45"
+                        [ngStyle]="{'margin-left.px':10}"></app-button>
+                </div>
             </div>
-      
-      </div>
-      
+
+        </div>
+
     </form>
 </div>

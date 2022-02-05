@@ -1,0 +1,33 @@
+import { Component, OnInit } from '@angular/core';
+import { FileUploadService } from '../../services/file-upload/file-upload.service';
+
+@Component({
+  selector: 'app-file-upload',
+  templateUrl: './file-upload.component.html',
+  styleUrls: ['./file-upload.component.css']
+})
+export class FileUploadComponent implements OnInit {
+
+
+  // Variable to store shortLink from api response
+  shortLink: string = "";
+  loading: boolean = false; // Flag variable
+  file!: File; // Variable to store file
+
+  // Inject service 
+  constructor(private fileUploadService: FileUploadService) { }
+
+  ngOnInit(): void {
+  }
+
+  // On file Select
+  onChange(event: any) {
+    this.file = event.target.files[0];
+  }
+
+  // OnClick of button Upload
+  onUpload() {
+    
+  }
+
+}

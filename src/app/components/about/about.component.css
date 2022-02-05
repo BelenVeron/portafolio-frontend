@@ -3,7 +3,6 @@
 
 .wrapper {
     width: 100%;
-    height: 200px;
 }
 
 .blog-post {
@@ -14,44 +13,43 @@
 }
 
 .container-text {
-    padding-left: 10%;
-    width: 70%;
+    width: 100%;
 }
 
 .img-pod {
     display: flex;
     flex-direction: column;
     text-align: center;
+    position: relative;
+    left: 10%;
+    transform: translate(-50%, -15%);
+}
+
+.image {
+    display: flex;
+    margin: 0 0 0 8rem;
 }
 
 img {
     height: 100px;
     width: 100px;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, -50%);
     border-radius: 100%;
     box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
     border: solid #ff5e62 5px;
 }
 
-h3 {
-    margin: 0 0 0.5rem 0;
-    color: #999;
-    font-size: 1.25rem;
-    position: relative;
-    bottom: 10%;
-}
-
 h1 {
-    margin: 0 0 1rem 0;
+    margin: 0 0 0.5rem 0;
     font-size: 2.5rem;
     letter-spacing: 0.5px;
     color: #333;
 }
 
-p {
-    margin: 0 0 4.5rem 0;
-    font-size: 1.5rem;
-    color: #333;
+.buttons {
+    display: flex;
+    justify-content: right;
+}
+
+.description {
+    margin-top: 3rem;
 }
