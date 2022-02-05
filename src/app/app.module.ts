@@ -20,6 +20,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HeroComponent } from './components/hero/hero.component';
 import { AboutComponent } from './components/about/about.component';
 import { ButtonComponent } from './components/button/button.component';
+import { ExperienceComponent } from './components/experience/experience.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ButtonComponent } from './components/button/button.component';
     HeroComponent,
     AboutComponent,
     ButtonComponent,
+    ExperienceComponent,
   ],
   imports: [
     BrowserModule,
