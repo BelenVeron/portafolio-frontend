@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="blog-post">
     <div class="img-pod">
-      <div [ngClass]="{'image': isAdmin}">
+      <div class="image">
         <img [src]="source">
         <input style="display:none" type="file" id="image" #imageInputFile (change)="onUpload($event)" accept="image/png, image/jpeg, image/gif">
         <app-button *ngIf="isAdmin" type="edit" width="40" height="50" (click)="imageInputFile.click()"></app-button>

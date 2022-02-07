@@ -23,6 +23,7 @@ export class AboutComponent implements OnInit {
 
   personalInformation!: PersonalInformation;
   isAdmin = false;
+  noData = false;
 
   constructor(
     private personalInformationService: PersonalInformationService,
@@ -68,8 +69,15 @@ export class AboutComponent implements OnInit {
       },
       err => {
         console.log(err);
+        if (err.status === 400){
+          this.setNoData(true);
+        }
       }
     )
+  }
+
+  setNoData(value: boolean): void{
+    this.noData = value;
   }
 
   
