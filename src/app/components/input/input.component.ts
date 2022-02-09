@@ -28,7 +28,7 @@ export class InputComponent implements OnInit {
     }
   }
 
-  addValue(value: string, event: any){
+  addValue(value: string){
     if (this.typeNum){
       this.width = value.length*12+10; 
       value = value.replace(/[^0-9\.]+/g, '')

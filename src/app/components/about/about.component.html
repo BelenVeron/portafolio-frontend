@@ -26,7 +26,7 @@
         <app-button *ngIf="isAdmin" type="delete" width="40" height="50" (click)="delete()">
         </app-button>
       </div>
-      <app-textarea *ngIf="personalInformation" classInput="information" [value]="personalInformation.summary"
+      <app-textarea *ngIf="personalInformation" [value]="personalInformation.summary"
         [disabled]="!isAdmin"></app-textarea>
     </div>
   </div>

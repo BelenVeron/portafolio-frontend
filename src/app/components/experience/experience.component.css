@@ -3,7 +3,19 @@
 .title {
 	margin-top: 12px;
 	margin-left: 12px;
+	display: flex;
 }
+
+.container-card {
+	display: block;
+	max-width: 700px;
+	margin: auto;
+}
+
+.buttons {
+	display: flex;
+	justify-content: right;
+  }
 
 .blog-card {
 	display: flex;
@@ -98,7 +110,7 @@
 	margin-right: 2px;
 }
 
-.blog-card .details .tags li:first-child {
+.blog-card .details .tags li:nth-child(2) {
 	margin-left: -4px;
 }
 

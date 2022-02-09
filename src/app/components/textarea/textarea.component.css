@@ -14,3 +14,18 @@
     border: black solid 1px;
     padding: 20px;
 }
+
+.card {
+    width: 90%;
+    height: 100px;
+    margin-top: 20px;
+    font-size: 1rem;
+}
+
+.card:disabled {
+    width: 90%;
+    height: 100px;
+    margin-top: 20px;
+    font-size: 1rem;
+    border: none;
+}

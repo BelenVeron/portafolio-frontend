@@ -7,6 +7,7 @@ export const environment = {
   authURL: 'http://localhost:8080/auth/',
   personalInformationURL: 'http://localhost:8080/personalInformation/',
   skillURL: 'http://localhost:8080/skill/',
+  experienceURL: 'http://localhost:8080/workExperience/',
 };
 
 /*

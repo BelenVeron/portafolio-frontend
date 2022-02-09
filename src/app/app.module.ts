@@ -29,6 +29,7 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SkillComponent } from './components/skill/skill.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,10 @@ import { SkillComponent } from './components/skill/skill.component';
     NgxSpinnerModule,
     BrowserAnimationsModule
   ],
-  providers: [interceptorProvider],
+  providers: [
+    interceptorProvider,
+    DatePipe,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
