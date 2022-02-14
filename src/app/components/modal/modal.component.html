@@ -1,0 +1,41 @@
+<div class="wrapper">
+
+	<div [ngClass]="'modal_box ' + active">
+		<div class="modal_bg_shadow"></div>
+		<div class="modal_box_wrap">
+			<div class="modal_header">
+				{{title}}
+			</div>
+			<div class="modal_body" >
+				<div *ngFor="let setting of settings">
+
+					<!-- //////// Diferent element in setting ////////////////  -->
+					<div *ngIf="setting.image" class="image-container">
+						<img class="image" [src]="source">
+						<input style="display:none" type="file" id="image" #imageInputFile (change)="onUpload($event)"
+						accept="image/png, image/jpeg, image/gif">
+						<app-button type="edit" width="40" height="50" (click)="imageInputFile.click()">
+						</app-button>
+						<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="small" color="#fff" type="ball-scale-multiple">
+							<p style="font-size: 20px; color: white">Subiendo...</p>
+						</ngx-spinner>
+					</div>
+   
+				   <app-input *ngIf="setting.input" (newValueEvent)="addValue($event, setting.value)" classInput="information"
+					   [value]="setting.value" [type]="setting.value">
+				   </app-input>
+				   
+				   <app-textarea *ngIf="setting.textarea" [value]="setting.value"></app-textarea>
+				</div>
+			</div>
+			<div class="modal_footer">
+				<div class="modal_btn_grp">
+					<app-button text="Cerrar" type="submit" width="120" height="45" [ngStyle]="{'margin-right.px':10}"
+						(click)="closeModal()"></app-button>
+					<app-button text="Confirmar" type="submit" width="120" height="45" [ngStyle]="{'margin-left.px':10}"
+						(click)="confirm()"></app-button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Image } from '../../models/crud/image';
 import { TokenService } from '../auth/token.service';
+import { ImageDto } from 'src/app/models/crud/image-dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageUploadService {
 
-  imageURL = 'http://localhost:8080/';
+  imageURL = 'http://localhost:8080/cloudinary/';
 
   constructor(
     private httpClient: HttpClient,
@@ -20,10 +21,24 @@ export class ImageUploadService {
     return this.httpClient.get<Image[]>(this.imageURL + 'list');
   }
 
-  public upload(image: File, service: string): Observable<any> {
+  public get(id: any): Observable<Image> {
+    return this.httpClient.get<Image>(this.imageURL + 'get/' + id);
+  }
+
+  // save the image in cloudinary and the backend return the
+  // image database with the new id and the other items 
+  public upload(image: File): Observable<Image> {
     const formData = new FormData();
     formData.append('multipartFile', image);
-    return this.httpClient.put<any>(this.imageURL + service + '/update-image/' + this.tokenService.getUsername(), formData);
+    return this.httpClient.post<Image>(this.imageURL + 'upload', formData);
+  }
+
+  // save the image in cloudinary and the backend return the
+  // image without id
+  public uploadHost(image: File): Observable<Image> {
+    const formData = new FormData();
+    formData.append('multipartFile', image);
+    return this.httpClient.post<ImageDto>(this.imageURL + 'upload-host', formData);
   }
 
   public delete(id: number): Observable<any> {

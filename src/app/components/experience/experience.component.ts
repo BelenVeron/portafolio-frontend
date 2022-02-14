@@ -49,13 +49,11 @@ export class ExperienceComponent implements OnInit {
         this.setSource(this.experiences);
       },
       err => {
-        console.log(err);
         if (err.status === 400){
           this.setNoData(true);
         }
       }
     )
-    console.log(this.experiences)
   }
 
   setNoData(value: boolean) {

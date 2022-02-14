@@ -1,33 +1,21 @@
 <div class="wrapper">
   <div class="blog-post">
     <div class="img-pod">
-      <div class="image">
-        <img [src]="source">
-        <input style="display:none" type="file" id="image" #imageInputFile (change)="onUpload($event)" accept="image/png, image/jpeg, image/gif">
-        <app-button *ngIf="isAdmin" type="edit" width="40" height="50" (click)="imageInputFile.click()"></app-button>
-        <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="small" color="#fff" type="ball-scale-multiple">
-          <p style="font-size: 20px; color: white">Subiendo...</p>
-        </ngx-spinner>
-      </div>
-      <div class="description">
-        <app-button *ngIf="isAdmin" type="edit" width="40" height="50" (click)="onUpdate()">
-        </app-button>
-        <app-input *ngIf="personalInformation" (newValueEvent)="addName($event)" classInput="information"
-          [value]="personalInformation.name" [type]="personalInformation.name" [disabled]="!isAdmin"></app-input>
-        <app-input *ngIf="personalInformation" classInput="information" [value]="personalInformation.degree"
-          [type]="personalInformation.degree" [disabled]="!isAdmin"></app-input>
-      </div>
+        <img class="image" [src]="source">
+        <h3 *ngIf="personalInformation">{{personalInformation.name}}</h3>
+        <h3 *ngIf="personalInformation">{{personalInformation.degree}}</h3>
     </div>
     <div class="container-text">
       <h1>Información profesional</h1>
       <div class="buttons">
-        <app-button *ngIf="isAdmin" type="edit" width="40" height="50" (click)="onUpdate()">
+        <app-button *ngIf="isAdmin" type="edit" width="40" height="50" (click)="openUpdateModal()">
         </app-button>
         <app-button *ngIf="isAdmin" type="delete" width="40" height="50" (click)="delete()">
         </app-button>
       </div>
-      <app-textarea *ngIf="personalInformation" [value]="personalInformation.summary"
-        [disabled]="!isAdmin"></app-textarea>
+      <p *ngIf="personalInformation">{{personalInformation.summary}}</p>
     </div>
   </div>
 </div>
+
+<app-modal [source]="source" [active]="activeModal" title="Información profesional" [(settings)]="modalSetting" (settingsChange)="onUpdate()"></app-modal>
