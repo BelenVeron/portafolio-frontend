@@ -20,8 +20,10 @@ export class TextareaComponent implements OnInit {
 
   ngOnInit(): void {
     this.text = this.value;
-    this.rows = this.value.length/60;
-    this.cols = this.value.length/10;
+    if (this.value.length > 100) {
+      this.rows = this.value.length/60;
+      this.cols = this.value.length/10;
+    }
   }
 
   addValue(value: string){

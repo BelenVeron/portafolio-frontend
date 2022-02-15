@@ -29,6 +29,7 @@
 	border-radius: 5px;
 	overflow: hidden;
 	z-index: 0;
+	height: 220px;
 }
 
 .blog-card a {

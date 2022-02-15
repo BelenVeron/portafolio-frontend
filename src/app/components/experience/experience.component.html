@@ -9,32 +9,36 @@
 <div *ngFor="let experience of experiences">
   <div class="container-card">
     <div class="buttons">
-      <app-button *ngIf="isAdmin" type="edit" width="40" height="50" (click)="onUpdate()">
+      <app-button *ngIf="isAdmin" type="edit" width="40" height="50" (click)="openUpdateModal(experience)">
       </app-button>
-      <app-button *ngIf="isAdmin" type="delete" width="40" height="50" (click)="delete()">
+      <app-button *ngIf="isAdmin" type="delete" width="40" height="50" (click)="delete(experience.id)">
       </app-button>
     </div>
     <div class="blog-card">
       <div class="meta">
         <div class="photo"
-          style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg)">
+        [style.background-image]="'url(' + setSourceImage(experience) + ')'">
         </div>
           <ul class="details">
-            <li class="date">Comienzo: Aug. 24, 2015</li>
-            <li class="date">Fin: Aug. 24, 2015</li>
+            <li *ngIf="experience.start" class="date">Comienzo: {{experience.start}}</li>
+            <li *ngIf="experience.end" class="date">Fin: {{experience.end}}</li>
           </ul>
         </div>
       <div class="description">
-        <h1 *ngIf="!isAdmin">{{experience.degree}}</h1>
-        <app-input *ngIf="experience && isAdmin" (newValueEvent)="addDegree($event, experience.id)" classInput="title"
-          [value]="experience.degree" [type]="experience.degree"></app-input>
-               <app-textarea *ngIf="experience" classTextarea="card" [value]="experience.description"
-        [disabled]="!isAdmin"></app-textarea>
+        <h1 *ngIf="experience.degree">{{experience.degree}}</h1>
+        <p *ngIf="experience.description">{{experience.description}}</p>
       </div>
     </div>
   </div>
 </div>
-<!-- <div class="title">
+<app-modal [source]="source" [active]="activeModal" title="Información profesional" [(settings)]="modalSetting" (settingsChange)="onUpdate()"></app-modal>
+
+<!-- 
+  <app-input *ngIf="experience && isAdmin" (newValueEvent)="addDegree($event, experience.id)" classInput="title"
+          [value]="experience.degree" [type]="experience.degree"></app-input>
+               <app-textarea *ngIf="experience" classTextarea="card" [value]="experience.description"
+        [disabled]="!isAdmin"></app-textarea>
+  <div class="title">
   <h1>{{title}}</h1>
   <app-button *ngIf="isAdmin" type="add" width="40" height="50" (click)="addCard()">
   </app-button>

@@ -26,8 +26,8 @@ export class ExperienceService {
     return this.httpClient.post<any>(this.experienceURL + 'create/' + this.tokenService.getUsername(), experience);
   }
 
-  public update(experience: Experience): Observable<any> {
-    return this.httpClient.put<any>(this.experienceURL + 'update/' + experience.id, experience);
+  public update(experience: ExperienceDto, id: any): Observable<any> {
+    return this.httpClient.put<any>(this.experienceURL + 'update/' + id, experience);
   }
 
   public delete(id: number): Observable<any> {

@@ -18,6 +18,10 @@ export class SkillComponent implements OnInit {
   isAdmin = false;
   maxlenght: string = '4';
 
+  @Input() activeModal: string = '';
+  modalSetting: any[] = []
+  noData: boolean = false;
+
   constructor(
     private SkillService: SkillService,
     private toastr: ToastrService,
@@ -48,6 +52,35 @@ export class SkillComponent implements OnInit {
     )
   }
 
+    // set modalSetting with Experience, to send to modal
+  // and make the element that is need
+  setModalSetting(data: Skill): void {
+    this.modalSetting.push({id: data.id});
+    this.modalSetting.push({label: 'Nombre', input: true, value: data.name});
+    this.modalSetting.push({label: 'Porcentaje', input: true, value: data.percent});
+    console.log(this.modalSetting)
+  }
+
+  // if confirm the change in the modal, set the experiences
+  // based in the change in modalSetting 
+  setSkill(): Skill {
+    let skill = new Skill(
+      this.modalSetting[0].id,
+      this.modalSetting[1].value,
+      this.modalSetting[2].value,
+    );
+    return skill;
+  }
+
+  openUpdateModal(data: Skill): void{
+    this.setModalSetting(data);
+    this.activeModal = 'active'
+  }
+
+  setNoData(value: boolean) {
+    this.noData = value;
+  }
+
   addPercent(value: string, id: number) {
     /* value = value.replace(/[^0-9\.]+/g, '')
     if (isNaN(parseInt(value))){
@@ -75,8 +108,8 @@ export class SkillComponent implements OnInit {
   }
 
   
-  onUpdate(skill: Skill): void {
-    this.SkillService.update(skill).subscribe(
+  onUpdate(): void {
+    this.SkillService.update(this.setSkill()).subscribe(
       data => {
         this.toastr.success('Skill update', 'OK', {
           timeOut: 3000
@@ -84,9 +117,9 @@ export class SkillComponent implements OnInit {
       },
       err => {
         console.log('error',err);
-        /* this.toastr.error(err.error.message, 'Fail', {
+        this.toastr.error(err.error.message, 'Fail', {
           timeOut: 3000
-        }); */
+        });
       }
     )
   }

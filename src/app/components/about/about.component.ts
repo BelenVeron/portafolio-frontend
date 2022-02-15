@@ -51,7 +51,7 @@ export class AboutComponent implements OnInit {
   // set modalSetting with personalInformation, to send to modal
   // and make the element that is need
   setModalSetting(): void {
-    this.modalSetting.push({image: true, value: this.personalInformation.image});
+    this.modalSetting.push({image: true, type: 'round', value: this.personalInformation.image});
     this.modalSetting.push({input: true, value: this.personalInformation.name});
     this.modalSetting.push({input: true, value: this.personalInformation.degree});
     this.modalSetting.push({textarea: true, value: this.personalInformation.summary});

@@ -16,6 +16,8 @@ export class ModalComponent implements OnInit {
   @Input() title: string = 'Titulo'
   @Input() settings: any[] = []
   @Output() settingsChange = new EventEmitter<any[]>();
+  // input source of the parent component, and
+  // set when change in the modal in this.onUpload
   @Input() source: string = ''
   image: any;
   imageNew!: ImageDto;
@@ -37,12 +39,12 @@ export class ModalComponent implements OnInit {
       this.source = data.imageUrl;
     }
   }
-
+  
   onUpload(event: any): void {
     this.spinner.show();
-      this.image = event.target.files[0];
-      this.imageUploadService.uploadHost(this.image).subscribe(
-        data => {
+    this.image = event.target.files[0];
+    this.imageUploadService.uploadHost(this.image).subscribe(
+      data => {
           this.spinner.hide();
           this.setSource(data)
           this.imageNew = data
@@ -57,13 +59,17 @@ export class ModalComponent implements OnInit {
   setSettingsSource(data: ImageDto): void {
     this.settings.forEach(element => {
       if (element.image){
-        element.value.name = data.name;
-        element.value.imageUrl = data.imageUrl;
-        element.value.imageId = data.imageId;
+        if (element.value) {
+          element.value.name = data.name;
+          element.value.imageUrl = data.imageUrl;
+          element.value.imageId = data.imageId;
+        }
       }
     });
   }
 
+  // get the value of the settings and the event's value
+  // of the input and set in the settings' valuee
   addValue(event: any, value: any): void {
     this.settings.forEach(element => {
       if (element.value === value){

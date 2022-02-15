@@ -7,11 +7,11 @@
 				{{title}}
 			</div>
 			<div class="modal_body" >
-				<div *ngFor="let setting of settings">
-
+				<div class="container" *ngFor="let setting of settings">
+					<label for="">{{setting.label}}</label>
 					<!-- //////// Diferent element in setting ////////////////  -->
 					<div *ngIf="setting.image" class="image-container">
-						<img class="image" [src]="source">
+						<img [ngClass]="setting.type" [src]="source">
 						<input style="display:none" type="file" id="image" #imageInputFile (change)="onUpload($event)"
 						accept="image/png, image/jpeg, image/gif">
 						<app-button type="edit" width="40" height="50" (click)="imageInputFile.click()">
@@ -25,7 +25,7 @@
 					   [value]="setting.value" [type]="setting.value">
 				   </app-input>
 				   
-				   <app-textarea *ngIf="setting.textarea" [value]="setting.value"></app-textarea>
+				   <app-textarea *ngIf="setting.textarea" [ngStyle]="{'margin-top.px':10}" [value]="setting.value" (newValueEvent)="addValue($event, setting.value)"></app-textarea>
 				</div>
 			</div>
 			<div class="modal_footer">

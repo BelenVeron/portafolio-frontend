@@ -150,7 +150,7 @@ body{
 	display: block;
 }
 
-.image {
+.round {
     height: 100px;
     width: 100px;
     border-radius: 100%;
@@ -161,4 +161,20 @@ body{
 .image-container {
 	display: flex;
     margin-bottom: 1rem;
+}
+
+.square {
+	width: 250px;
+    margin-right: 20px;
+	border-radius: 5px;
+    box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
+    border: solid #ff5e62 5px;
+}
+
+.container {
+	display: flex;
+}
+
+.container label {
+	margin-right: 20px;
 }
