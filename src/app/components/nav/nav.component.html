@@ -19,6 +19,18 @@
             routerLink="/login" 
         ></app-button>
         <app-button 
+            text="Index" 
+            *ngIf="isLogged" 
+            routerLink="/index" 
+        ></app-button>
+        <app-button 
+            [ngStyle]="{'margin-left.px':10}"
+            text="Editar" 
+            *ngIf="isLogged" 
+            routerLink="/edit" 
+        ></app-button>
+        <app-button 
+            [ngStyle]="{'margin-left.px':10}"
             text="Logout" 
             *ngIf="isLogged" 
             (click)="onLogOut()" 

@@ -1,16 +1,23 @@
 <div class="wrapper">
   <div class="blog-post">
-    <div class="img-pod">
+    <div *ngIf="personalInformation" class="img-pod">
         <img class="image" [src]="source">
         <h3 *ngIf="personalInformation">{{personalInformation.name}}</h3>
         <h3 *ngIf="personalInformation">{{personalInformation.degree}}</h3>
     </div>
     <div class="container-text">
-      <h1>Información profesional</h1>
-      <div class="buttons">
-        <app-button *ngIf="isAdmin" type="edit" width="40" height="50" (click)="openUpdateModal()">
+      <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="small" color="#fff" type="ball-scale-multiple">
+        <p style="font-size: 20px; color: white">Cargando...</p>
+      </ngx-spinner>
+      <div  class="title">
+        <h1 *ngIf="isAdmin || (!isAdmin  && personalInformation)">INFORMACION PROFESIONAL</h1>
+        <app-button *ngIf="isAdmin  && !noButton && !personalInformation" type="add" width="40" height="50" (click)="addPersonalInformation()">
         </app-button>
-        <app-button *ngIf="isAdmin" type="delete" width="40" height="50" (click)="delete()">
+      </div>
+      <div class="buttons">
+        <app-button *ngIf="isAdmin && !noButton && personalInformation" type="edit" width="40" height="50" (click)="openUpdateModal()">
+        </app-button>
+        <app-button *ngIf="isAdmin && !noButton && personalInformation" type="delete" width="40" height="50" (click)="delete()">
         </app-button>
       </div>
       <p *ngIf="personalInformation">{{personalInformation.summary}}</p>
@@ -18,4 +25,4 @@
   </div>
 </div>
 
-<app-modal [source]="source" [active]="activeModal" title="Información profesional" [(settings)]="modalSetting" (settingsChange)="onUpdate()"></app-modal>
+<app-modal [source]="source" [active]="activeModal" title="Información profesional" [(settings)]="modalSetting" (settingsChange)="onUpdate()" (closeModalEvent)="cancel()"></app-modal>

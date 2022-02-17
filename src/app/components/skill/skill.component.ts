@@ -20,7 +20,10 @@ export class SkillComponent implements OnInit {
 
   @Input() activeModal: string = '';
   modalSetting: any[] = []
+  // if no data
   noData: boolean = false;
+  // if do not want to show edit buttons
+  @Input() noButton = false;
 
   constructor(
     private SkillService: SkillService,

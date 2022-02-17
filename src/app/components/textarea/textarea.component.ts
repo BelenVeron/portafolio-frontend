@@ -13,14 +13,14 @@ export class TextareaComponent implements OnInit {
   @Input() text: string = '';
   @Input() value: string = '';
   @Input() rows: number = 4;
-  @Input() cols: number = 50;
+  @Input() cols: number = 80;
   @Output() newValueEvent = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit(): void {
     this.text = this.value;
-    if (this.value.length > 100) {
+    if (this.value.length > 200) {
       this.rows = this.value.length/60;
       this.cols = this.value.length/10;
     }

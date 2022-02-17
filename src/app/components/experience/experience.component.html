@@ -1,17 +1,17 @@
 <div class="title">
   <h1>{{title}}</h1>
-  <app-button *ngIf="isAdmin" type="add" width="40" height="50" (click)="addCard()">
+  <app-button *ngIf="isAdmin  && !noButton" type="add" width="40" height="50" (click)="addCard()">
   </app-button>
 </div>
-<div *ngIf="noData">
+<div *ngIf="noData && !noButton">
   <h3>No hay ninguna experiencia laboral agregada</h3>
 </div>
 <div *ngFor="let experience of experiences">
   <div class="container-card">
     <div class="buttons">
-      <app-button *ngIf="isAdmin" type="edit" width="40" height="50" (click)="openUpdateModal(experience)">
+      <app-button *ngIf="isAdmin && !noButton" type="edit" width="40" height="50" (click)="openUpdateModal(experience)">
       </app-button>
-      <app-button *ngIf="isAdmin" type="delete" width="40" height="50" (click)="delete(experience.id)">
+      <app-button *ngIf="isAdmin && !noButton" type="delete" width="40" height="50" (click)="delete(experience.id)">
       </app-button>
     </div>
     <div class="blog-card">
@@ -31,7 +31,7 @@
     </div>
   </div>
 </div>
-<app-modal [source]="source" [active]="activeModal" title="Información profesional" [(settings)]="modalSetting" (settingsChange)="onUpdate()"></app-modal>
+<app-modal [source]="source" [active]="activeModal" title="Información profesional" [(settings)]="modalSetting" (settingsChange)="onUpdate()" (closeModalEvent)="cancel()"></app-modal>
 
 <!-- 
   <app-input *ngIf="experience && isAdmin" (newValueEvent)="addDegree($event, experience.id)" classInput="title"

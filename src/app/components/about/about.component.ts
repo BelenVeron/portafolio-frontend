@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Image } from 'src/app/models/crud/image';
+import { PersonalInformationDto } from 'src/app/models/crud/personal-infomration-dto';
 import { PersonalInformation } from 'src/app/models/crud/personal-information';
 import { TokenService } from 'src/app/services/auth/token.service';
 import { ImageUploadService } from 'src/app/services/image-upload/image-upload.service';
@@ -22,12 +23,14 @@ export class AboutComponent implements OnInit {
   
   source: string = ''
 
-  personalInformation!: PersonalInformation;
+  personalInformation!: PersonalInformation | null;
   imageDB!: Image;
   // if is admin
   isAdmin = false;
   // if no data
   noData = false;
+  // if do not want to show edit buttons
+  @Input() noButton = false;
   @Input() activeModal: string = '';
   modalSetting: any[] = []
 
@@ -44,30 +47,78 @@ export class AboutComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getpersonalInformations();
     this.isAdmin = this.tokenService.isAdmin();
+  }
+  
+  ngAfterViewInit(): void {
+    this.getpersonalInformations();
+  }
+
+  async uploadImage(): Promise<void> {
+    this.imageUploadService.uploadRemoteUrl(this.source).subscribe(
+      data => {
+        this.toastr.success('personalInformation update', 'OK', {
+          timeOut: 3000
+        });
+        this.imageDB;
+      },
+      err => {
+        console.log('error',err);
+        this.toastr.error(err.error.message, 'Fail', {
+          timeOut: 3000
+        }); 
+      }
+    );
+  }
+
+  async addPersonalInformation() {
+    console.log('add')
+    await this.uploadImage();
+    let data = new PersonalInformationDto(
+      'Titulo o especialidad',
+      'Nombre y apellido',
+      'Resumen, descripcion o cualquier cosa que quieras escribir acerca tuyo como edad, años programando, expectativas, etc; y de tu formacion, lenguajes de programacion que manejas,etc.',
+      this.imageDB
+    )
+    
+    this.personalInformationService.create(data).subscribe(
+      data => {
+        this.toastr.success('personalInformation update', 'OK', {
+          timeOut: 3000
+        });
+        this.getpersonalInformations();
+      },
+      err => {
+        console.log('error',err);
+        this.toastr.error(err.error.message, 'Fail', {
+          timeOut: 3000
+        }); 
+      }
+    )
+    //window.location.reload()
   }
 
   // set modalSetting with personalInformation, to send to modal
   // and make the element that is need
   setModalSetting(): void {
-    this.modalSetting.push({image: true, type: 'round', value: this.personalInformation.image});
-    this.modalSetting.push({input: true, value: this.personalInformation.name});
-    this.modalSetting.push({input: true, value: this.personalInformation.degree});
-    this.modalSetting.push({textarea: true, value: this.personalInformation.summary});
+    if (this.personalInformation != null) {
+      this.modalSetting = [];
+      this.modalSetting.push({image: true, type: 'round', value: this.personalInformation.image});
+      this.modalSetting.push({input: true, value: this.personalInformation.name});
+      this.modalSetting.push({input: true, value: this.personalInformation.degree});
+      this.modalSetting.push({textarea: true, value: this.personalInformation.summary});
+    }
   }
 
   // if confirm the change in the modal, set the personalInformation
   // based in the change in modalSetting 
   setPersonalInformation(): void {
-    this.personalInformation.image = this.modalSetting[0].value;
-    this.personalInformation.name = this.modalSetting[1].value;
-    this.personalInformation.degree = this.modalSetting[2].value;
-    this.personalInformation.summary = this.modalSetting[3].value;
-  }
-
-  addName(value: string) {
-    this.personalInformation.name = value;
+    if (this.personalInformation != null) {
+      this.personalInformation.image = this.modalSetting[0].value;
+      this.personalInformation.name = this.modalSetting[1].value;
+      this.personalInformation.degree = this.modalSetting[2].value;
+      this.personalInformation.summary = this.modalSetting[3].value;
+    }
   }
 
   openUpdateModal(): void{
@@ -91,18 +142,22 @@ export class AboutComponent implements OnInit {
   }
 
   getpersonalInformations(): void {
+    this.spinner.show()
     this.personalInformationService.get().subscribe(
       data => {
         this.personalInformation = data;
         this.setSource(this.personalInformation);
-        this.getImageDB(this.personalInformation.image.id);
-        console.log('imagen1',this.imageDB)
+        if (this.personalInformation.image) {
+          this.getImageDB(this.personalInformation.image.id);
+        }
         this.setModalSetting();
+        this.spinner.hide()
       },
       err => {
-        console.log(err);
         if (err.status === 400){
           this.setNoData(true);
+          this.setSource(null);
+          this.spinner.hide()
         }
       }
     )
@@ -114,45 +169,60 @@ export class AboutComponent implements OnInit {
   }
 
   
-  setSource(data: PersonalInformation){
-    if (data.image == null) {
+  setSource(data: any){
+    if (data ===  null || data.image == null) {
       this.source = 'https://res.cloudinary.com/angular-portafolio/image/upload/v1643579684/default/profile.png'
     } else {
       this.source = data.image.imageUrl;
     }
   }
   
+  
+
   onUpdate(): void {
     this.setPersonalInformation();
-    this.personalInformationService.save(this.personalInformation).subscribe(
-      data => {
-        this.toastr.success('personalInformation update', 'OK', {
-          timeOut: 3000
-        });
-      },
-      err => {
-        console.log('error',err);
-        this.toastr.error(err.error.message, 'Fail', {
-          timeOut: 3000
-        }); 
-      }
-    )
-    location.reload();
+    if (this.personalInformation != null) {
+      this.personalInformationService.save(this.personalInformation).subscribe(
+        data => {
+          // set source to the image
+          this.setSource(this.personalInformation);
+          this.toastr.success('personalInformation update', 'OK', {
+            timeOut: 3000
+          });
+        },
+        err => {
+          console.log('error',err);
+          this.toastr.error(err.error.message, 'Fail', {
+            timeOut: 3000
+          }); 
+        }
+      )
+    }
+    // close the modal, and set the active property
+    this.activeModal = ''
   }
 
+  cancel(): void {
+    this.activeModal = ''
+  }
+
+
   delete() {
-    this.personalInformationService.delete(this.personalInformation).subscribe(
-      data => {
-        this.toastr.success('personalInformation delete', 'OK', {
-          timeOut: 3000
-        });
-        this.getpersonalInformations();
-      },
-      err => {
-        this.toastr.error(err.error.message, 'Fail', {
-          timeOut: 3000
-        });
-      }
-    )
+    if (this.personalInformation != null) {
+      this.personalInformationService.delete(this.personalInformation).subscribe(
+        data => {
+          this.toastr.success('personalInformation delete', 'OK', {
+            timeOut: 3000
+          });
+          this.getpersonalInformations();
+        },
+        err => {
+          this.toastr.error(err.error.message, 'Fail', {
+            timeOut: 3000
+          });
+        }
+      )
+    }
+    this.personalInformation = null;
   }
 }

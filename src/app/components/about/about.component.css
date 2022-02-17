@@ -1,15 +1,39 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap");
 
+.title {
+	margin-top: 12px;
+	margin-left: 12px;
+	display: flex;
+	align-items: center;
+}
+
+.title h1{
+	margin: 0;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 25px;
+    letter-spacing: -1px;
+    word-spacing: 1px;
+    color: #000000;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: italic;
+    font-variant: normal;
+    text-transform: none;
+}
 
 .wrapper {
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 .blog-post {
     padding: 30px 60px 20px 60px;
-    background: #fff;
-    width: 90%;
+    width: 80%;
     display: flex;
+    border-radius: 20px;
+    background: rgb(0,119,113);
+    background: linear-gradient(146deg, rgba(0,119,113,1) 0%, rgba(112,192,251,1) 12%, rgba(255,255,255,1) 100%);
 }
 
 .container-text {

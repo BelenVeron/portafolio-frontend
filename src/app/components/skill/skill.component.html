@@ -1,17 +1,20 @@
 <div class="body-container">
 
     <div class="title">
-        <h1>Hard & Soft Skills</h1>
-        <app-button *ngIf="isAdmin" type="add" width="40" height="50" (click)="addSkill()">
+        <h1 *ngIf="!noData || !noButton">Hard & Soft Skills</h1>
+        <app-button *ngIf="isAdmin && !noButton" type="add" width="40" height="50" (click)="addSkill()">
         </app-button>
+    </div>
+    <div *ngIf="noData && !noButton">
+        <h3>No hay ningun skill agregado</h3>
     </div>
     <div class="skills">
         <div class="container">
             <div *ngFor="let skill of skills">
                 <div class="buttons">
-                    <app-button *ngIf="isAdmin" type="edit" width="40" height="50" (click)="openUpdateModal(skill)">
+                    <app-button *ngIf="isAdmin && !noButton" type="edit" width="40" height="50" (click)="openUpdateModal(skill)">
                     </app-button>
-                    <app-button *ngIf="isAdmin" type="delete" width="40" height="50" (click)="delete(skill.id)">
+                    <app-button *ngIf="isAdmin && !noButton" type="delete" width="40" height="50" (click)="delete(skill.id)">
                     </app-button>
                 </div>
                 <div class="card">

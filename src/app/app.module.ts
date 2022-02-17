@@ -31,6 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SkillComponent } from './components/skill/skill.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { DatePipe } from '@angular/common';
+import { EducationComponent } from './components/education/education.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { DatePipe } from '@angular/common';
     FileUploadComponent,
     ImageUploadComponent,
     SkillComponent,
-    ModalComponent
+    ModalComponent,
+    EducationComponent
   ],
   imports: [
     BrowserModule,

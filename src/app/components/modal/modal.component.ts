@@ -16,11 +16,12 @@ export class ModalComponent implements OnInit {
   @Input() title: string = 'Titulo'
   @Input() settings: any[] = []
   @Output() settingsChange = new EventEmitter<any[]>();
+  @Output() closeModalEvent = new EventEmitter<any[]>();
   // input source of the parent component, and
   // set when change in the modal in this.onUpload
   @Input() source: string = ''
   image: any;
-  imageNew!: ImageDto;
+  imageNew: ImageDto | null = null;
 
   constructor(
     private router: Router,
@@ -56,7 +57,9 @@ export class ModalComponent implements OnInit {
       ); 
   }
 
-  setSettingsSource(data: ImageDto): void {
+  // search the image in the set the new image
+  // only when confirm
+  setSettingsSource(data: any): void {
     this.settings.forEach(element => {
       if (element.image){
         if (element.value) {
@@ -83,14 +86,20 @@ export class ModalComponent implements OnInit {
   }
 
   closeModal(): void {
-    this.active = ''
-    location.reload();
+    this.active = '';
+    this.imageNew = null;
+    this.closeModalEvent.emit();
   }
 
   // emit an event with the settings changed and close modal
   confirm(): void {
-    this.setSettingsSource(this.imageNew);
+    // if there is no image changed
+    if (this.imageNew !== null) {
+      this.setSettingsSource(this.imageNew);
+    }
     this.settingsChange.emit(this.settings)
+
+    // close the modal
     this.closeModal();
   }
 

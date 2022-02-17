@@ -41,6 +41,12 @@ export class ImageUploadService {
     return this.httpClient.post<ImageDto>(this.imageURL + 'upload-host', formData);
   }
 
+  // save the image in cloudinary from url and the backend return the
+  // image database
+  public uploadRemoteUrl(url: string): Observable<Image> {
+    return this.httpClient.post<Image>(this.imageURL + 'upload-url', {'url': url});
+  }
+
   public delete(id: number): Observable<any> {
     return this.httpClient.delete<any>(this.imageURL + `delete/${id}`);
   }

@@ -146,4 +146,9 @@ svg circle:nth-child(2n)
 .title {
   display: flex;
   margin-bottom: 30px;
+  align-items: center;
+}
+
+.title h1{
+	margin: 0;
 }

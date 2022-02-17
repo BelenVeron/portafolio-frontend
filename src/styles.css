@@ -1,4 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~normalize.css';
-html, body { height: 100%; }
+html, body { 
+    height: 100%; 
+    background-color: rgb(229 242 254 / 1);
+}
+
+h1 {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 22px;
+    letter-spacing: -1px;
+    word-spacing: 1px;
+    color: #000000;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: italic;
+    font-variant: normal;
+    text-transform: none;
+}
+
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,22 +1,25 @@
+import { Image } from "./image";
+
 export class ExperienceDto {
 
     degree: string;
     start: string;
     end: string;
-    inProgress: boolean;
     description: string;
-    
+    image: Image;
+
+
     constructor(
         degree: string,
         start: string,
         end: string,
-        inProgress: boolean,
-        description: string
+        description: string,
+        image: Image
     ) {
         this.degree = degree;
         this.start = start;
         this.end = end;
-        this.inProgress = inProgress;
         this.description = description;
+        this.image = image;
     }
 }
