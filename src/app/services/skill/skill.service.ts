@@ -27,7 +27,7 @@ export class SkillService {
   }
 
   public update(skill: Skill): Observable<any> {
-    return this.httpClient.put<any>(this.skillUrl + 'update/' + skill.id, skill);
+    return this.httpClient.put<any>(this.skillUrl + 'update', skill);
   }
 
   public delete(id: number): Observable<any> {

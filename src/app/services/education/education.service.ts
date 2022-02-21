@@ -26,8 +26,8 @@ export class EducationService {
     return this.httpClient.post<any>(this.educationURL + 'create/' + this.tokenService.getUsername(), education);
   }
 
-  public update(education: EducationDto, id: any): Observable<any> {
-    return this.httpClient.put<any>(this.educationURL + 'update/' + id, education);
+  public update(education: EducationDto): Observable<any> {
+    return this.httpClient.put<any>(this.educationURL + 'update', education);
   }
 
   public delete(id: number): Observable<any> {

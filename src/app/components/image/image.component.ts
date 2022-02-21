@@ -9,6 +9,7 @@ export class ImageComponent implements OnInit {
 
   @Input() type: string = "";
   @Input() height: number = 50;
+  @Input() size: number = 3;
   @Input() textLogo: string = "";
   @Input() link: string = "";
   source: string = "";

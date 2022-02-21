@@ -27,6 +27,7 @@ export class EducationComponent implements OnInit {
   @Input() activeModal: string = '';
   modalSetting: any[] = []
   image!: Image;
+  imageDB!: Image;
 
   constructor(
     private toastr: ToastrService,
@@ -51,7 +52,6 @@ export class EducationComponent implements OnInit {
         if (this.educations.length === 0) {
           this.noData = true
         }
-        this.setSources(this.educations);
       },
       err => {
         if (err.status === 400){
@@ -60,30 +60,6 @@ export class EducationComponent implements OnInit {
       }
     )
   }
-
-  setSources(data: Education[]) {
-    data.forEach(element => {
-      if (element.image == null) {
-        this.getImage();
-        element.image = this.image;
-      }
-    });
-  }
-
-  // get an image from database if there is not image
-  // in the experience, so can be setting in the modal
-  getImage(){
-    this.imageUploadService.get(5).subscribe(
-      data => {
-        this.image = data;
-      },
-      err => {
-        if (err.status === 400){
-          
-        }
-      }
-    )
-  } 
 
   // set modalSetting with Education, to send to modal
   // and make the element that is need
@@ -104,19 +80,25 @@ export class EducationComponent implements OnInit {
 
   // if confirm the change in the modal, set the educations
   // based in the change in modalSetting 
-  setEducation(data: any): EducationDto {
-    let educationDto = new EducationDto(
-      this.modalSetting[2].value,
-      this.modalSetting[3].value,
-      this.modalSetting[4].value,
-      this.modalSetting[5].value
+  setEducation(data: any): Education {
+    let education = new Education(
+      data[0].id,
+      data[2].value,
+      data[3].value,
+      data[4].value,
+      data[5].value,
+      data[1].value
     );
-    return educationDto;
+    return education;
   }
 
   openUpdateModal(data: Education): void{
     this.setModalSetting(data);
     this.activeModal = 'active'
+  }
+
+  cancel(): void {
+    this.activeModal = ''
   }
 
   setNoData(value: boolean) {
@@ -141,10 +123,33 @@ export class EducationComponent implements OnInit {
     }
   }
 
- 
+  async uploadImage(): Promise<void> {
+    this.imageUploadService.uploadRemoteUrl(this.source).subscribe(
+      data => {
+        this.toastr.success('Education update', 'OK', {
+          timeOut: 3000
+        });
+        this.imageDB;
+      },
+      err => {
+        console.log('error',err);
+        this.toastr.error(err.error.message, 'Fail', {
+          timeOut: 3000
+        }); 
+      }
+    );
+  }
 
-  addCard(): void {
-    let experience: EducationDto = new EducationDto('Nueva institucion', 'Titulo', this.util.getToday(), 'Periodo');
+  async addCard(): Promise<void> {
+    await this.uploadImage();
+    let experience: EducationDto = new EducationDto(
+      'Nueva institucion', 
+      'Titulo', 
+      this.util.getToday(), 
+      'Periodo',
+      this.imageDB
+    );
+
     this.educationService.save(experience).subscribe(
       data => {
         this.toastr.success('Education guardado', 'OK', {
@@ -161,12 +166,13 @@ export class EducationComponent implements OnInit {
     this.reload();
   }
 
+
   // reload the page
   reload(): void {window.location.reload();}
 
   onUpdate(): void {
     let experience = this.setEducation(this.modalSetting);
-    this.educationService.update(experience, this.modalSetting[0].id).subscribe(
+    this.educationService.update(experience).subscribe(
       data => {
         this.toastr.success('Education guardado', 'OK', {
           timeOut: 3000
@@ -179,9 +185,7 @@ export class EducationComponent implements OnInit {
         }); 
       }
     ) 
-    setTimeout(() => {
-      this.reload();
-    }, 3000);
+    this.reload();
   }
   
   delete(id: number): void {
@@ -197,7 +201,7 @@ export class EducationComponent implements OnInit {
           timeOut: 3000
         }); 
       }
-      ) 
+    ) 
     this.reload();
   }
 

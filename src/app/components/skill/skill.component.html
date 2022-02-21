@@ -1,11 +1,10 @@
-<div class="body-container">
-
+<div *ngIf="skills.length || (isAdmin  && !noButton)" class="body-container">
     <div class="title">
-        <h1 *ngIf="!noData || !noButton">Hard & Soft Skills</h1>
-        <app-button *ngIf="isAdmin && !noButton" type="add" width="40" height="50" (click)="addSkill()">
+        <app-title [title]="title" fontSize="25"></app-title>
+        <app-button *ngIf="isAdmin  && !noButton" type="add" width="40" height="50" (click)="addSkill()">
         </app-button>
-    </div>
-    <div *ngIf="noData && !noButton">
+      </div>
+    <div *ngIf="!skills.length && !noButton">
         <h3>No hay ningun skill agregado</h3>
     </div>
     <div class="skills">
@@ -34,16 +33,11 @@
             </div>
         </div>
     </div>
-    <app-modal [active]="activeModal" title="Skills" [(settings)]="modalSetting" (settingsChange)="onUpdate()"></app-modal>
+    <app-modal 
+        [active]="activeModal" 
+        title="Skills" 
+        [(settings)]="modalSetting" 
+        (settingsChange)="onUpdate()" 
+        (closeModalEvent)="cancel()"
+    ></app-modal>
 </div>
-
-
-<!-- 
-<app-input *ngIf="skill" (newValueEvent)="addPercent($event, skill.id)" classInput="information"
-[value]="(isAdmin)?skill.percent.toString():skill.percent.toString()+'%'"
-[type]="'text'" [disabled]="!isAdmin" [typeNum]="true" [maxlenght]="maxlenght"></app-input> 
-
-<app-input *ngIf="skill" (newValueEvent)="addName($event, skill.id)" classInput="information"
-                    [value]="skill.name" [type]="'text'" [disabled]="!isAdmin"></app-input>
-
--->

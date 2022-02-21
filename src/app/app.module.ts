@@ -24,7 +24,6 @@ import { ExperienceComponent } from './components/experience/experience.componen
 import { InputComponent } from './components/input/input.component';
 import { interceptorProvider } from './interceptors/edit/edit.interceptor';
 import { TextareaComponent } from './components/textarea/textarea.component';
-import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,6 +31,9 @@ import { SkillComponent } from './components/skill/skill.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { DatePipe } from '@angular/common';
 import { EducationComponent } from './components/education/education.component';
+import { DividerComponent } from './components/divider/divider.component';
+import { TitleComponent } from './components/title/title.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -49,11 +51,13 @@ import { EducationComponent } from './components/education/education.component';
     ExperienceComponent,
     InputComponent,
     TextareaComponent,
-    FileUploadComponent,
     ImageUploadComponent,
     SkillComponent,
     ModalComponent,
-    EducationComponent
+    EducationComponent,
+    DividerComponent,
+    TitleComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

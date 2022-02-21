@@ -52,7 +52,6 @@ export class ExperienceComponent implements OnInit {
         if (this.experiences.length === 0) {
           this.noData = true
         }
-        //this.setSources(this.experiences);
       },
       err => {
         if (err.status === 400){
@@ -61,18 +60,6 @@ export class ExperienceComponent implements OnInit {
       }
     )
   }
-
-  /* setSources(data: Experience[]) {
-    data.forEach(element => {
-      if (element.image == null) {
-        this.getImage();
-        element.image = this.image;
-      }
-    });
-  } */
-
-  // get an image from database if there is not image
-  // in the experience, so can be setting in the modal
 
   // set modalSetting with Experience, to send to modal
   // and make the element that is need

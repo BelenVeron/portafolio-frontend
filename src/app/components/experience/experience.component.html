@@ -1,5 +1,5 @@
 <div class="title">
-  <h1>{{title}}</h1>
+  <app-title [title]="title" fontSize="25"></app-title>
   <app-button *ngIf="isAdmin  && !noButton" type="add" width="40" height="50" (click)="addCard()">
   </app-button>
 </div>

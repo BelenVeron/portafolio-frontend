@@ -17,6 +17,7 @@ export class SkillComponent implements OnInit {
   skills: Skill[] = [];
   isAdmin = false;
   maxlenght: string = '4';
+  title: string = 'HARD & SOFT SKILLS'
 
   @Input() activeModal: string = '';
   modalSetting: any[] = []
@@ -42,6 +43,10 @@ export class SkillComponent implements OnInit {
     }else{
       this.maxlenght = '4'
     }
+  }
+
+  cancel(): void {
+    this.activeModal = ''
   }
 
   getSkills(): void {
@@ -84,22 +89,6 @@ export class SkillComponent implements OnInit {
     this.noData = value;
   }
 
-  addPercent(value: string, id: number) {
-    /* value = value.replace(/[^0-9\.]+/g, '')
-    if (isNaN(parseInt(value))){
-      value = '0'
-    } else {
-       value = value.replace(/^0+(\d)/, '$1')
-    } */
-    console.log(value)
-    let percent = parseInt(value, 10);
-    for (const obj of this.skills) {
-      if (obj.id === id) {
-        obj.percent = percent;
-        break;
-      }
-    }
-  }
 
   addName(value: string, id: number) {
     for (const obj of this.skills) {
@@ -125,6 +114,7 @@ export class SkillComponent implements OnInit {
         });
       }
     )
+    window.location.reload();
   }
 
   delete(id: number) {
@@ -153,9 +143,9 @@ export class SkillComponent implements OnInit {
       },
       err => {
         console.log('error',err);
-        /* this.toastr.error(err.error.message, 'Fail', {
+        this.toastr.error(err.error.message, 'Fail', {
           timeOut: 3000
-        }); */
+        });
       }
     )
     this.reload();

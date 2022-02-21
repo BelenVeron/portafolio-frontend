@@ -1,4 +1,8 @@
-<div (click)="externalRedirect()">
+<div (click)="externalRedirect()" *ngIf="type === 'logo'">
     <img [src]="source" [style.--heightImg]="height+'px'" alt="">
     <h6>{{textLogo}}</h6>
 </div>
+
+
+<a *ngIf="type !== 'logo'" [href]="link" class="generic-anchor" target="_blank" [style.--font-size.rem]="size"><i
+        [class]="'fa fa-'+type"></i></a>

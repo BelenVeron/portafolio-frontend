@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="personalInformation || (isAdmin  && !noButton)">
   <div class="blog-post">
     <div *ngIf="personalInformation" class="img-pod">
         <img class="image" [src]="source">
@@ -10,7 +10,7 @@
         <p style="font-size: 20px; color: white">Cargando...</p>
       </ngx-spinner>
       <div  class="title">
-        <h1 *ngIf="isAdmin || (!isAdmin  && personalInformation)">INFORMACION PROFESIONAL</h1>
+        <h1 >INFORMACION PROFESIONAL</h1>
         <app-button *ngIf="isAdmin  && !noButton && !personalInformation" type="add" width="40" height="50" (click)="addPersonalInformation()">
         </app-button>
       </div>

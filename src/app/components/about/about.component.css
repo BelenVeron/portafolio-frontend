@@ -9,16 +9,7 @@
 
 .title h1{
 	margin: 0;
-    font-family: "Comic Sans MS", cursive, sans-serif;
-    font-size: 25px;
-    letter-spacing: -1px;
-    word-spacing: 1px;
-    color: #000000;
-    font-weight: normal;
-    text-decoration: none;
     font-style: italic;
-    font-variant: normal;
-    text-transform: none;
 }
 
 .wrapper {
@@ -39,6 +30,13 @@
 .container-text {
     width: 70%;
     padding-left: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.container-text p{
+    height: 60%;
 }
 
 .img-pod {
@@ -60,7 +58,7 @@ img {
     width: 100px;
     border-radius: 100%;
     box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
-    border: solid #ff5e62 5px;
+    border: solid #386c85 5px;
 }
 
 h1 {
