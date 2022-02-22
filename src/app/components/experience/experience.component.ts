@@ -80,15 +80,25 @@ export class ExperienceComponent implements OnInit {
 
   // if confirm the change in the modal, set the experiences
   // based in the change in modalSetting 
-  setExperience(data: any): Experience {
+  setExperience(): Experience {
     let experience = new Experience(
-      data[0].id,
-      data[2].value,
-      data[3].value,
-      data[4].value,
-      data[5].value,
-      data[1].value
+      this.modalSetting[0].id,
+      this.modalSetting[2].value,
+      this.modalSetting[3].value,
+      this.modalSetting[4].value,
+      this.modalSetting[5].value,
+      this.modalSetting[1].value
     );
+    this.experiences.forEach(element => {
+      if (element.id === experience.id) {
+        element.degree = experience.degree;
+        element.description = experience.description;
+        element.start = experience.start;
+        element.end = experience.end;
+        element.image = experience.image;
+      }
+    });
+    this.modalSetting = [];
     return experience;
   }
 
@@ -141,8 +151,7 @@ export class ExperienceComponent implements OnInit {
   }
  
 
-  async addCard(): Promise<void> {
-    await this.uploadImage();
+  addCard(): void {
     let experience: ExperienceDto = new ExperienceDto(
         'Nuevo Puesto o lugar', 
         this.util.getToday(), 
@@ -156,6 +165,7 @@ export class ExperienceComponent implements OnInit {
         this.toastr.success('Experience guardado', 'OK', {
           timeOut: 3000
         });
+        this.experiences.push(data);
       },
       err => {
         console.log('error',err);
@@ -164,15 +174,10 @@ export class ExperienceComponent implements OnInit {
         }); 
       }
     )
-    this.reload();
   }
 
-  // reload the page
-  reload(): void {window.location.reload();}
-
   onUpdate(): void {
-    let experience = this.setExperience(this.modalSetting);
-    this.experienceService.update(experience).subscribe(
+    this.experienceService.update(this.setExperience()).subscribe(
       data => {
         this.toastr.success('Experience guardado', 'OK', {
           timeOut: 3000
@@ -185,16 +190,16 @@ export class ExperienceComponent implements OnInit {
         }); 
       }
     ) 
-    this.reload();
     this.activeModal = ''
   }
   
   delete(id: number): void {
     this.experienceService.delete(id).subscribe(
       data => {
-        this.toastr.success('Experience guardado', 'OK', {
+        this.toastr.success('Experience eliminado', 'OK', {
           timeOut: 3000
         });
+        this.experiences = this.experiences.filter(el => el.id !== id);
       },
       err => {
         console.log('error',err);
@@ -202,8 +207,7 @@ export class ExperienceComponent implements OnInit {
           timeOut: 3000
         }); 
       }
-      ) 
-    this.reload();
+    ) 
   }
 
 }

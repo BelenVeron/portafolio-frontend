@@ -1,5 +1,4 @@
 <div class="wrapper">
-
 	<div [ngClass]="'modal_box ' + active">
 		<div class="modal_bg_shadow"></div>
 		<div class="modal_box_wrap">
@@ -23,6 +22,10 @@
    
 				   <app-input *ngIf="setting.input" (newValueEvent)="addValue($event, setting.value)" classInput="information"
 					   [value]="setting.value" [type]="setting.value">
+				   </app-input>
+
+				   <app-input *ngIf="setting.inputNumber" (newValueEvent)="addValue($event, setting.value)" classInput="information"
+					   [value]="setting.value" [type]="'number'">
 				   </app-input>
 				   
 				   <app-textarea *ngIf="setting.textarea" [ngStyle]="{'margin-top.px':10}" [value]="setting.value" (newValueEvent)="addValue($event, setting.value)"></app-textarea>

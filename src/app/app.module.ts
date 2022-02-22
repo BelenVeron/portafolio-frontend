@@ -34,6 +34,7 @@ import { EducationComponent } from './components/education/education.component';
 import { DividerComponent } from './components/divider/divider.component';
 import { TitleComponent } from './components/title/title.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { SocialMediaComponent } from './components/social-media/social-media.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { FooterComponent } from './components/footer/footer.component';
     EducationComponent,
     DividerComponent,
     TitleComponent,
-    FooterComponent
+    FooterComponent,
+    SocialMediaComponent
   ],
   imports: [
     BrowserModule,

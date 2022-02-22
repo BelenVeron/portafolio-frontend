@@ -11,6 +11,8 @@ export class ResponsiveDirective {
 
   @Input() appHighlight = '';
 
+  @Input() responsiveSize = '';
+
   @HostListener('mouseenter') onMouseEnter() {
     this.highlight(this.appHighlight || this.defaultColor || 'red');
   }
@@ -21,8 +23,9 @@ export class ResponsiveDirective {
 
   @HostListener('window:resize', ['$event'])
   onResize(event: { target: { innerWidth: Number } }) {
-    if (event.target.innerWidth < 400) this.highlight('red');
-    else this.highlight('yellow');
+    if (event.target.innerWidth < 900) this.responsiveSize = 'pad';
+    else if (event.target.innerWidth < 400) this.responsiveSize = 'phone';
+    else this.responsiveSize = '';
   }
 
   private highlight(color: string) {

@@ -111,7 +111,6 @@ export class HeroComponent implements OnInit {
     this.imageUploadService.get(id).subscribe(
       data => {
         this.imageDB = data;
-        console.log('imagen',this.imageDB)  
       },
       err => {
         console.log(err);

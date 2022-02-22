@@ -21,7 +21,7 @@ export class InputComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if (this.value.length === 0) {
+    if (this.value.length*12 < 250) {
       this.width = 250;
     } else {
       this.width = this.value.length*12;

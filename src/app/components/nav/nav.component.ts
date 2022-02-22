@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TokenService } from 'src/app/services/auth/token.service';
 
 @Component({
@@ -11,6 +11,8 @@ export class NavComponent implements OnInit {
   textLogo: string = "Argentina Programa - #YoProgramo";
   isLogged = false;
   isAdmin = false;
+  // if do not want to show edit buttons
+  @Input() noButton = false;
 
   constructor(private tokenService: TokenService) { }
 

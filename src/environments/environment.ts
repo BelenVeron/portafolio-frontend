@@ -10,6 +10,7 @@ export const environment = {
   experienceURL: 'http://localhost:8080/workExperience/',
   educationURL: 'http://localhost:8080/education/',
   heroURL: 'http://localhost:8080/hero/',
+  socialURL: 'http://localhost:8080/social/',
 };
 
 /*

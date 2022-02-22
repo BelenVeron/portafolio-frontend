@@ -6,13 +6,7 @@
     </div>
 
     <div class="navbar-buttons">
-        <div class="social-media">
-            <app-image type="instagram" [size]=1 link="https://www.instagram.com"></app-image>
-            <app-image type="facebook" [size]=1 link="https://www.facebook.com"></app-image>
-            <app-image type="twitter" [size]=1 link="https://www.twitter.com"></app-image>
-            <app-image type="youtube" [size]=1 link="https://www.youtube.com"></app-image>
-            <app-image type="linkedin" [size]=1 link="https://www.linkedin.com"></app-image>
-        </div>
+        <app-social-media [noButton]="noButton" [style.margin-right.rem]="1"></app-social-media>
         <app-button text="Login" *ngIf="!isLogged" routerLink="/login"></app-button>
         <app-button text="Index" *ngIf="isLogged" routerLink="/index"></app-button>
         <app-button [style.margin-left.px]="10" text="Editar" *ngIf="isLogged" routerLink="/edit"></app-button>

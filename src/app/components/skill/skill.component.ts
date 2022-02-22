@@ -12,11 +12,8 @@ import { SkillService } from 'src/app/services/skill/skill.service';
 })
 export class SkillComponent implements OnInit {
 
-  source: string = ''
-
   skills: Skill[] = [];
   isAdmin = false;
-  maxlenght: string = '4';
   title: string = 'HARD & SOFT SKILLS'
 
   @Input() activeModal: string = '';
@@ -38,11 +35,6 @@ export class SkillComponent implements OnInit {
   ngOnInit(): void {
     this.getSkills();
     this.isAdmin = this.tokenService.isAdmin();
-    if(this.isAdmin){
-      this.maxlenght = '3'
-    }else{
-      this.maxlenght = '4'
-    }
   }
 
   cancel(): void {
@@ -65,18 +57,26 @@ export class SkillComponent implements OnInit {
   setModalSetting(data: Skill): void {
     this.modalSetting.push({id: data.id});
     this.modalSetting.push({label: 'Nombre', input: true, value: data.name});
-    this.modalSetting.push({label: 'Porcentaje', input: true, value: data.percent});
+    this.modalSetting.push({label: 'Porcentaje', inputNumber: true, value: data.percent});
     console.log(this.modalSetting)
   }
 
   // if confirm the change in the modal, set the experiences
   // based in the change in modalSetting 
   setSkill(): Skill {
+    let percent: number = Number(this.modalSetting[2].value)
     let skill = new Skill(
       this.modalSetting[0].id,
       this.modalSetting[1].value,
-      this.modalSetting[2].value,
+      percent,
     );
+    this.skills.forEach(element => {
+      if (element.id === skill.id) {
+        element.name = skill.name;
+        element.percent = skill.percent;
+      }
+    });
+    this.modalSetting = [];
     return skill;
   }
 
@@ -103,9 +103,10 @@ export class SkillComponent implements OnInit {
   onUpdate(): void {
     this.SkillService.update(this.setSkill()).subscribe(
       data => {
-        this.toastr.success('Skill update', 'OK', {
+        this.toastr.success('Skill actualizado', 'OK', {
           timeOut: 3000
         });
+        console.log(data)
       },
       err => {
         console.log('error',err);
@@ -114,13 +115,12 @@ export class SkillComponent implements OnInit {
         });
       }
     )
-    window.location.reload();
   }
 
   delete(id: number) {
     this.SkillService.delete(id).subscribe(
       data => {
-        this.toastr.success('Skill delete', 'OK', {
+        this.toastr.success('Skill eliminado', 'OK', {
           timeOut: 3000
         });
         this.getSkills();
@@ -137,9 +137,10 @@ export class SkillComponent implements OnInit {
     let skill: SkillDto = new SkillDto('Nombre', 0);
     this.SkillService.save(skill).subscribe(
       data => {
-        this.toastr.success('Skill guardado', 'OK', {
+        this.toastr.success('Skill agregado', 'OK', {
           timeOut: 3000
         });
+        this.skills.push(data)
       },
       err => {
         console.log('error',err);
@@ -148,9 +149,6 @@ export class SkillComponent implements OnInit {
         });
       }
     )
-    this.reload();
   }
-
-  reload(): void {window.location.reload();}
 
 }

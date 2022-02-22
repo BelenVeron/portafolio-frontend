@@ -80,15 +80,25 @@ export class EducationComponent implements OnInit {
 
   // if confirm the change in the modal, set the educations
   // based in the change in modalSetting 
-  setEducation(data: any): Education {
+  setEducation(): Education {
     let education = new Education(
-      data[0].id,
-      data[2].value,
-      data[3].value,
-      data[4].value,
-      data[5].value,
-      data[1].value
+      this.modalSetting[0].id,
+      this.modalSetting[2].value,
+      this.modalSetting[3].value,
+      this.modalSetting[4].value,
+      this.modalSetting[5].value,
+      this.modalSetting[1].value
     );
+    this.educations.forEach(element => {
+      if (element.id === education.id) {
+        element.date = education.date;
+        element.degree = education.degree;
+        element.image = education.image;
+        element.institution = education.institution;
+        element.period = education.period;
+      }
+    });
+    this.modalSetting = [];
     return education;
   }
 
@@ -140,8 +150,7 @@ export class EducationComponent implements OnInit {
     );
   }
 
-  async addCard(): Promise<void> {
-    await this.uploadImage();
+  addCard(): void {
     let experience: EducationDto = new EducationDto(
       'Nueva institucion', 
       'Titulo', 
@@ -155,6 +164,7 @@ export class EducationComponent implements OnInit {
         this.toastr.success('Education guardado', 'OK', {
           timeOut: 3000
         });
+        this.educations.push(data);
       },
       err => {
         console.log('error',err);
@@ -163,16 +173,11 @@ export class EducationComponent implements OnInit {
         }); 
       }
     )
-    this.reload();
   }
 
 
-  // reload the page
-  reload(): void {window.location.reload();}
-
   onUpdate(): void {
-    let experience = this.setEducation(this.modalSetting);
-    this.educationService.update(experience).subscribe(
+    this.educationService.update(this.setEducation()).subscribe(
       data => {
         this.toastr.success('Education guardado', 'OK', {
           timeOut: 3000
@@ -185,7 +190,6 @@ export class EducationComponent implements OnInit {
         }); 
       }
     ) 
-    this.reload();
   }
   
   delete(id: number): void {
@@ -194,6 +198,7 @@ export class EducationComponent implements OnInit {
         this.toastr.success('Education guardado', 'OK', {
           timeOut: 3000
         });
+        this.educations = this.educations.filter(el => el.id !== id);
       },
       err => {
         console.log('error',err);
@@ -202,7 +207,6 @@ export class EducationComponent implements OnInit {
         }); 
       }
     ) 
-    this.reload();
   }
 
 }

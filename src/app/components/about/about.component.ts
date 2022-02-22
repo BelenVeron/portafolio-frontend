@@ -95,7 +95,6 @@ export class AboutComponent implements OnInit {
         }); 
       }
     )
-    //window.location.reload()
   }
 
   // set modalSetting with personalInformation, to send to modal
@@ -130,7 +129,6 @@ export class AboutComponent implements OnInit {
     this.imageUploadService.get(id).subscribe(
       data => {
         this.imageDB = data;
-        console.log('imagen',this.imageDB)  
       },
       err => {
         console.log(err);

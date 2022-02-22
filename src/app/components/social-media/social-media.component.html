@@ -1,0 +1,32 @@
+<div class="social-media">
+    <app-button *ngIf="isAdmin  && !noButton" type="edit" width="30" height="40" (click)="openUpdateModal()">
+    </app-button>
+    <div *ngFor="let social of socials">
+        <app-image [type]="social.social" [size]="size" [link]="social.link"></app-image>
+    </div>
+</div>
+
+<!-- ///////// MODAL ///////////////////-->
+<div class="wrapper">
+    <div [ngClass]="'modal_box ' + activeModal">
+        <div class="modal_bg_shadow"></div>
+        <div class="modal_box_wrap">
+            <div class="modal_header">
+                {{title}}
+                <app-button type="close" width="30" height="50" (click)="cancel()"></app-button>
+            </div>
+            <div class="modal_body">
+                <div class="container" *ngFor="let social of modalSetting">
+
+                    <app-button [type]="(social.id < 0)?'add':'delete'" width="30" height="50" (click)="addOrDelete(social)"></app-button>
+                    <label for="">{{social.social}}</label>
+                    <app-input (newValueEvent)="addLink($event, social.id)" classInput="social-media"
+                        [value]="social.link" [type]="social.link" [style.margin-right.px]="20">
+                    </app-input>
+                    <app-button *ngIf="social.id > 0" type="edit" width="30" height="50" (click)="onUpdate(social)"></app-button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
