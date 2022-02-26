@@ -91,14 +91,20 @@ export class HeroComponent implements OnInit {
     if (this.hero != null) {
       this.modalSetting = [];
       this.modalSetting.push({image: true, type: 'square', value: this.hero.image});
+    }else{
+      this.modalSetting.push({image: true, type: 'square', value: null});
     }
   }
 
   // if confirm the change in the modal, set the hero
   // based in the change in modalSetting 
   setHero(): void {
-    if (this.hero != null) {
-      this.hero.image = this.modalSetting[0].value;
+    if (this.modalSetting[0].value != null) {
+      if (this.hero != null) {
+        this.hero.image = this.modalSetting[0].value;
+      }else{
+        this.hero = new Hero (null, this.modalSetting[0].value);
+      }
     }
   }
 
@@ -127,7 +133,7 @@ export class HeroComponent implements OnInit {
       data => {
         this.hero = data;
         this.setSource(this.hero);
-        if (this.hero.image) {
+        if (this.hero !== null && this.hero.image) {
           this.getImageDB(this.hero.image.id);
         }
         this.setModalSetting();
@@ -151,7 +157,7 @@ export class HeroComponent implements OnInit {
   
   setSource(data: any){
     if (data ===  null || data.image == null) {
-      this.source = 'https://res.cloudinary.com/angular-portafolio/image/upload/v1643579684/default/profile.png'
+      this.source = 'https://res.cloudinary.com/angular-portafolio/image/upload/v1643579687/default/hero_qsmo76.png'
     } else {
       this.source = data.image.imageUrl;
     }

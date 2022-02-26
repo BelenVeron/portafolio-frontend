@@ -1,19 +1,19 @@
 import { Image } from "./image";
 export class PersonalInformation {
 
-    id: number;
+    id: number | null;
     name: string;
     degree: string;
     summary: string;
-    image: Image;
+    image: Image | null;
 
 
     constructor(
-        id: number,
+        id: number | null,
         name: string,
         degree: string,
         summary: string,
-        image: Image
+        image: Image | null
     ) {
         this.id = id;
         this.name = name;

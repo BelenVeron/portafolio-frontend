@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Skill } from 'src/app/models/crud/skill';
-import { SkillDto } from 'src/app/models/crud/skill-dto';
 import { TokenService } from 'src/app/services/auth/token.service';
 import { SkillService } from 'src/app/services/skill/skill.service';
 
@@ -45,6 +44,9 @@ export class SkillComponent implements OnInit {
     this.SkillService.get().subscribe(
       data => {
         this.skills = data;
+        if (data.length === 0) {
+          this.noData = true
+        }
       },
       err => {
         console.log(err);
@@ -56,8 +58,8 @@ export class SkillComponent implements OnInit {
   // and make the element that is need
   setModalSetting(data: Skill): void {
     this.modalSetting.push({id: data.id});
-    this.modalSetting.push({label: 'Nombre', input: true, value: data.name});
-    this.modalSetting.push({label: 'Porcentaje', inputNumber: true, value: data.percent});
+    this.modalSetting.push({label: 'Nombre', input: true, type: 'text', value: data.name});
+    this.modalSetting.push({label: 'Porcentaje', input: true, type: 'number', value: data.percent});
     console.log(this.modalSetting)
   }
 
@@ -117,30 +119,33 @@ export class SkillComponent implements OnInit {
     )
   }
 
-  delete(id: number) {
-    this.SkillService.delete(id).subscribe(
-      data => {
-        this.toastr.success('Skill eliminado', 'OK', {
-          timeOut: 3000
-        });
-        this.getSkills();
-      },
-      err => {
-        this.toastr.error(err.error.message, 'Fail', {
-          timeOut: 3000
-        });
-      }
-    )
+  delete(id: number | null) {
+    if (id != null){
+      this.SkillService.delete(id).subscribe(
+        data => {
+          this.toastr.success('Skill eliminado', 'OK', {
+            timeOut: 3000
+          });
+          this.getSkills();
+        },
+        err => {
+          this.toastr.error(err.error.message, 'Fail', {
+            timeOut: 3000
+          });
+        }
+      )
+    }
   }
 
   addSkill(): void {
-    let skill: SkillDto = new SkillDto('Nombre', 0);
+    let skill: Skill = new Skill(null, 'Nombre', 0);
     this.SkillService.save(skill).subscribe(
       data => {
         this.toastr.success('Skill agregado', 'OK', {
           timeOut: 3000
         });
         this.skills.push(data)
+        this.noData = false
       },
       err => {
         console.log('error',err);

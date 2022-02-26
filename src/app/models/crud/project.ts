@@ -1,28 +1,28 @@
 import { Image } from "./image";
 
-export class Education {
+export class Project {
 
     id: number | null;
-    institution: string;
-    degree: string;
+    name: string;
+    description: string;
     date: string;
-    period: string;
+    link: string;
     image: Image | null;
 
 
     constructor(
         id: number | null,
-        institution: string,
-        degree: string,
+        name: string,
+        description: string,
         date: string,
-        period: string,
+        link: string,
         image: Image | null
     ) {
         this.id = id;
-        this.institution = institution;
-        this.degree = degree;
+        this.name = name;
+        this.description = description;
         this.date = date;
-        this.period = period;
+        this.link = link;
         this.image = image;
     }
 }

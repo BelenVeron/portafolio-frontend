@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Education } from 'src/app/models/crud/education';
-import { EducationDto } from 'src/app/models/crud/education-dto';
 import { environment } from 'src/environments/environment';
 import { TokenService } from '../auth/token.service';
 
@@ -22,11 +21,11 @@ export class EducationService {
     return this.httpClient.get<Education[]>(this.educationURL + 'get/' + this.tokenService.getUsername());
   }
 
-  public save(education: EducationDto): Observable<any> {
+  public save(education: Education): Observable<any> {
     return this.httpClient.post<any>(this.educationURL + 'create/' + this.tokenService.getUsername(), education);
   }
 
-  public update(education: EducationDto): Observable<any> {
+  public update(education: Education): Observable<any> {
     return this.httpClient.put<any>(this.educationURL + 'update', education);
   }
 

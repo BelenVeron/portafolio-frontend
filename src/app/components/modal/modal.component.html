@@ -21,12 +21,9 @@
 					</div>
    
 				   <app-input *ngIf="setting.input" (newValueEvent)="addValue($event, setting.value)" classInput="information"
-					   [value]="setting.value" [type]="setting.value">
+					   [(value)]="setting.value" [type]="setting.type" >
 				   </app-input>
-
-				   <app-input *ngIf="setting.inputNumber" (newValueEvent)="addValue($event, setting.value)" classInput="information"
-					   [value]="setting.value" [type]="'number'">
-				   </app-input>
+				   <p *ngIf="setting.input">{{setting.value}}</p>
 				   
 				   <app-textarea *ngIf="setting.textarea" [ngStyle]="{'margin-top.px':10}" [value]="setting.value" (newValueEvent)="addValue($event, setting.value)"></app-textarea>
 				</div>

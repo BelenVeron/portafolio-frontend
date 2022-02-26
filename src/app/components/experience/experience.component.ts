@@ -5,7 +5,6 @@ import { TokenService } from 'src/app/services/auth/token.service';
 import { ExperienceService } from 'src/app/services/experience/experience.service';
 import { ImageUploadService } from 'src/app/services/image-upload/image-upload.service';
 import { Image } from 'src/app/models/crud/image';
-import { ExperienceDto } from 'src/app/models/crud/experience-dto';
 import { UtilService } from 'src/app/services/util/util.service';
 
 @Component({
@@ -72,9 +71,9 @@ export class ExperienceComponent implements OnInit {
     }
     this.modalSetting.push({id: data.id});
     this.modalSetting.push({label: 'Imagen', image: true, type: 'square', value: data.image});
-    this.modalSetting.push({label: 'Titulo o puesto', input: true, value: data.degree});
-    this.modalSetting.push({label: 'Fecha inicio', input: true, value: data.start});
-    this.modalSetting.push({label: 'Fecha finalizacion', input: true, value: data.end});
+    this.modalSetting.push({label: 'Titulo o puesto', input: true, type: 'text', value: data.degree});
+    this.modalSetting.push({label: 'Fecha inicio', input: true, type: 'date', value: data.start});
+    this.modalSetting.push({label: 'Fecha finalizacion', input: true, type: 'date', value: data.finished});
     this.modalSetting.push({label: 'Descripcion', textarea: true, value: data.description});
   }
 
@@ -94,7 +93,7 @@ export class ExperienceComponent implements OnInit {
         element.degree = experience.degree;
         element.description = experience.description;
         element.start = experience.start;
-        element.end = experience.end;
+        element.finished = experience.finished;
         element.image = experience.image;
       }
     });
@@ -152,13 +151,14 @@ export class ExperienceComponent implements OnInit {
  
 
   addCard(): void {
-    let experience: ExperienceDto = new ExperienceDto(
-        'Nuevo Puesto o lugar', 
-        this.util.getToday(), 
-        this.util.getToday(), 
-        'Descripcion',
-        this.imageDB
-        );
+    let experience: Experience = new Experience(
+      null,
+      'Nuevo Puesto o lugar', 
+      this.util.getToday(), 
+      this.util.getToday(), 
+      'Descripcion',
+      null
+    );
 
     this.experienceService.save(experience).subscribe(
       data => {
@@ -166,6 +166,7 @@ export class ExperienceComponent implements OnInit {
           timeOut: 3000
         });
         this.experiences.push(data);
+        this.noData = false;
       },
       err => {
         console.log('error',err);
@@ -177,7 +178,7 @@ export class ExperienceComponent implements OnInit {
   }
 
   onUpdate(): void {
-    this.experienceService.update(this.setExperience()).subscribe(
+    this.experienceService.save(this.setExperience()).subscribe(
       data => {
         this.toastr.success('Experience guardado', 'OK', {
           timeOut: 3000
@@ -193,21 +194,23 @@ export class ExperienceComponent implements OnInit {
     this.activeModal = ''
   }
   
-  delete(id: number): void {
-    this.experienceService.delete(id).subscribe(
-      data => {
-        this.toastr.success('Experience eliminado', 'OK', {
-          timeOut: 3000
-        });
-        this.experiences = this.experiences.filter(el => el.id !== id);
-      },
-      err => {
-        console.log('error',err);
-        this.toastr.error(err.error.message, 'Fail', {
-          timeOut: 3000
-        }); 
-      }
-    ) 
+  delete(id: number | null): void {
+    if (id != null){
+      this.experienceService.delete(id).subscribe(
+        data => {
+          this.toastr.success('Experience eliminado', 'OK', {
+            timeOut: 3000
+          });
+          this.experiences = this.experiences.filter(el => el.id !== id);
+        },
+        err => {
+          console.log('error',err);
+          this.toastr.error(err.error.message, 'Fail', {
+            timeOut: 3000
+          }); 
+        }
+      ) 
+    }
   }
 
 }

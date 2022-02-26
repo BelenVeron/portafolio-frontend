@@ -2,26 +2,26 @@ import { Image } from "./image";
 
 export class Experience {
 
-    id: number;
+    id: number | null;
     degree: string;
     start: string;
-    end: string;
+    finished: string;
     description: string;
-    image: Image;
+    image: Image | null;
 
 
     constructor(
-        id: number,
+        id: number | null,
         degree: string,
         start: string,
-        end: string,
+        finished: string,
         description: string,
-        image: Image
+        image: Image | null
     ) {
         this.id = id;
         this.degree = degree;
         this.start = start;
-        this.end = end;
+        this.finished = finished;
         this.description = description;
         this.image = image;
     }

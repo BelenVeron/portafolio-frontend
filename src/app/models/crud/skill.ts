@@ -1,11 +1,11 @@
 export class Skill {
 
-    id: number;
+    id: number | null;
     name: string;
     percent: number;
 
     constructor(
-        id: number,
+        id: number | null,
         name: string,
         percent: number,
     ) {

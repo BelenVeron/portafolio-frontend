@@ -21,7 +21,7 @@ export class ModalComponent implements OnInit {
   // set when change in the modal in this.onUpload
   @Input() source: string = ''
   image: any;
-  imageNew: ImageDto | null = null;
+  imageNew: Image | null = null;
 
   constructor(
     private router: Router,
@@ -35,26 +35,47 @@ export class ModalComponent implements OnInit {
   
   setSource(data: any){
     if (data.imageUrl == null) {
-      this.source = 'https://res.cloudinary.com/angular-portafolio/image/upload/v1643579684/default/profile.png'
+      this.source = 'https://res.cloudinary.com/angular-portafolio/image/upload/v1645714624/default/no-image_jyoagt.png'
     } else {
       this.source = data.imageUrl;
     }
   }
+
   
   onUpload(event: any): void {
-    this.spinner.show();
     this.image = event.target.files[0];
-    this.imageUploadService.uploadHost(this.image).subscribe(
+    // delete the previous image if it exists
+    if (this.imageNew !== null) {
+      if (this.imageNew.id) {
+        this.delete(this.imageNew.id);
+      }
+    }
+    this.save();
+  }
+
+  delete(id: number): void {
+    this.imageUploadService.delete(id).subscribe(
       data => {
-          this.spinner.hide();
-          this.setSource(data)
-          this.imageNew = data
-        },
-        err => {
-          alert(err.error.mensaje);
-          this.spinner.hide();
-        }
-      ); 
+      },
+      err => {
+        alert(err.error.mensaje);
+      }
+    );  
+  }
+
+  save() {
+    this.spinner.show();
+    this.imageUploadService.upload(this.image).subscribe(
+      data => {
+        this.spinner.hide();
+        this.setSource(data)
+        this.imageNew = data
+      },
+      err => {
+        alert(err.error.mensaje);
+        this.spinner.hide();
+      }
+    );
   }
 
   // search the image in the set the new image
@@ -66,6 +87,8 @@ export class ModalComponent implements OnInit {
           element.value.name = data.name;
           element.value.imageUrl = data.imageUrl;
           element.value.imageId = data.imageId;
+        }else{
+          element.value = data;
         }
       }
     });
@@ -74,6 +97,7 @@ export class ModalComponent implements OnInit {
   // get the value of the settings and the event's value
   // of the input and set in the settings' valuee
   addValue(event: any, value: any): void {
+    console.log(event);
     this.settings.forEach(element => {
       if (element.value === value){
         element.value = event

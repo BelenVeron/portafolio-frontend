@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PersonalInformationDto } from 'src/app/models/crud/personal-infomration-dto';
 import { PersonalInformation } from 'src/app/models/crud/personal-information';
 import { environment } from 'src/environments/environment';
 import { TokenService } from '../auth/token.service';
@@ -26,7 +25,7 @@ export class PersonalInformationService {
     return this.httpClient.post<any>(this.personalInformationURL + 'create/' + this.tokenService.getUsername(), personalInformation);
   }
   
-  public create(personalInformation: PersonalInformationDto): Observable<any> {
+  public create(personalInformation: PersonalInformation): Observable<any> {
     return this.httpClient.post<any>(this.personalInformationURL + 'create/' + this.tokenService.getUsername(), personalInformation);
   }
 

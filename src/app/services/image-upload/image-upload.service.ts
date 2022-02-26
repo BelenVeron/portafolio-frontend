@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { Image } from '../../models/crud/image';
 import { TokenService } from '../auth/token.service';
 import { ImageDto } from 'src/app/models/crud/image-dto';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageUploadService {
 
-  imageURL = 'http://localhost:8080/cloudinary/';
+  imageURL = environment.imageURL;
 
   constructor(
     private httpClient: HttpClient,

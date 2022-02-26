@@ -35,6 +35,7 @@ import { DividerComponent } from './components/divider/divider.component';
 import { TitleComponent } from './components/title/title.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SocialMediaComponent } from './components/social-media/social-media.component';
+import { ProjectComponent } from './components/project/project.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { SocialMediaComponent } from './components/social-media/social-media.com
     DividerComponent,
     TitleComponent,
     FooterComponent,
-    SocialMediaComponent
+    SocialMediaComponent,
+    ProjectComponent
   ],
   imports: [
     BrowserModule,

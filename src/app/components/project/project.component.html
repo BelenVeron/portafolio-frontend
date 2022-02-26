@@ -1,0 +1,40 @@
+
+
+<div *ngIf="projects.length || (isAdmin  && !noButton)" class="body-container">
+<app-divider></app-divider>
+  <div class="title">
+      <app-title fontSize="25" [title]="title"></app-title>
+      <app-button *ngIf="isAdmin  && !noButton" type="add" width="40" height="50" (click)="addCard()">
+      </app-button>
+    </div>
+    <div *ngIf="noData && !noButton">
+      <h3>No hay ningun Proyecto agregado</h3>
+    </div>
+    <div class="project" *ngFor="let project of projects">
+      
+      <div class="container">
+          <div class="buttons">
+              <app-button *ngIf="isAdmin && !noButton" type="edit" width="40" height="50" (click)="openUpdateModal(project)">
+              </app-button>
+              <app-button *ngIf="isAdmin && !noButton" type="delete" width="40" height="50" (click)="delete(project.id)">
+              </app-button>
+          </div>
+          <div class="card transition">
+              <h2 class="transition">{{project.name}}
+                  <br>
+                  <small>{{project.date}}</small>
+                  <br>
+                  <small>{{project.description}}</small>
+              </h2>
+              <div class="cta-container transition">
+                  <app-button text="Link" type="submit" width="120" height="45" [ngStyle]="{'margin-left.px':10}"
+              (click)="goProject(project.link)"></app-button>
+              </div>
+              <div class="card_circle transition" [style.background-image]="'url(' + setSourceImage(project) + ')'"></div>
+          </div>
+      </div>
+  
+    </div>
+    <app-modal [source]="source" [active]="activeModal" title="Proyectos" [(settings)]="modalSetting"
+      (settingsChange)="onUpdate()" (closeModalEvent)="cancel()"></app-modal>
+</div>

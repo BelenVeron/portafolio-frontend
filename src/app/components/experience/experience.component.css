@@ -1,7 +1,7 @@
 @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
 .title {
-	margin-top: 12px;
+	margin-top: 30px;
 	margin-left: 6rem;
 	display: flex;
 	align-items: center;
@@ -122,7 +122,7 @@
 
 .blog-card .description {
 	padding: 1rem;
-	background: #fff;
+	background: linear-gradient(284deg, rgba(0,119,113,1) 0%, rgba(112,192,251,1) 12%, rgba(255,255,255,1) 88%);
 	position: relative;
 	z-index: 1;
 }

@@ -66,3 +66,14 @@ input:focus {
     border: none;
     background-color: white;
 }
+
+/* disable arrow from input number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+  }

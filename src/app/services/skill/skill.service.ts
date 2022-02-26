@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Skill } from 'src/app/models/crud/skill';
-import { SkillDto } from 'src/app/models/crud/skill-dto';
 import { environment } from 'src/environments/environment';
 import { TokenService } from '../auth/token.service';
 
@@ -22,7 +21,7 @@ export class SkillService {
     return this.httpClient.get<Skill[]>(this.skillUrl + 'get/' + this.tokenService.getUsername());
   }
 
-  public save(skill: SkillDto): Observable<any> {
+  public save(skill: Skill): Observable<any> {
     return this.httpClient.post<any>(this.skillUrl + 'create/' + this.tokenService.getUsername(), skill);
   }
 

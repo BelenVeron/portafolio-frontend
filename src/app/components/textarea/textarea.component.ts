@@ -20,9 +20,11 @@ export class TextareaComponent implements OnInit {
 
   ngOnInit(): void {
     this.text = this.value;
-    if (this.value.length > 200) {
-      this.rows = this.value.length/60;
-      this.cols = this.value.length/10;
+    if (this.value) {
+      if (this.value.length > 200) {
+        this.rows = this.value.length/60;
+        this.cols = this.value.length/10;
+      }
     }
   }
 

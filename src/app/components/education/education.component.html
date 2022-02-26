@@ -1,34 +1,39 @@
-<div class="title">
-  <app-title fontSize="25" [title]="title"></app-title>
-  <app-button *ngIf="isAdmin  && !noButton" type="add" width="40" height="50" (click)="addCard()">
-  </app-button>
-</div>
-<div *ngIf="noData && !noButton">
-  <h3>No hay ninguna Educación agregada</h3>
-</div>
-<div class="education" *ngFor="let education of educations">
-  <div class="container-card">
-    <div class="buttons">
-      <app-button *ngIf="isAdmin && !noButton" type="edit" width="40" height="50" (click)="openUpdateModal(education)">
-      </app-button>
-      <app-button *ngIf="isAdmin && !noButton" type="delete" width="40" height="50" (click)="delete(education.id)">
-      </app-button>
-    </div>
-    <div class="blog-card">
-      <div class="meta">
-        <div class="photo" [style.background-image]="'url(' + setSourceImage(education) + ')'">
-        </div>
-        <ul class="details">
-          <li *ngIf="education.date" class="date">Fecha: {{education.date}}</li>
-          <li *ngIf="education.date" class="date">Institucion: {{education.institution}}</li>
-        </ul>
+<div class="container" *ngIf="educations.length !== 0 || (isAdmin  && !noButton)">
+
+  <div class="title">
+    <app-title fontSize="25" [title]="title"></app-title>
+    <app-button *ngIf="isAdmin  && !noButton" type="add" width="40" height="50" (click)="addCard()">
+    </app-button>
+  </div>
+  <div *ngIf="noData && !noButton">
+    <h3>No hay ninguna Educación agregada</h3>
+  </div>
+  <div class="education" *ngFor="let education of educations">
+    <div class="container-card">
+      <div class="buttons">
+        <app-button *ngIf="isAdmin && !noButton" type="edit" width="40" height="50"
+          (click)="openUpdateModal(education)">
+        </app-button>
+        <app-button *ngIf="isAdmin && !noButton" type="delete" width="40" height="50" (click)="delete(education.id)">
+        </app-button>
       </div>
-      <div class="description">
-        <h1 *ngIf="education.degree">{{education.degree}}</h1>
-        <p *ngIf="education.period">{{education.period}}</p>
+      <div class="blog-card">
+        <div class="meta">
+          <div class="photo" [style.background-image]="'url(' + setSourceImage(education) + ')'">
+          </div>
+          <ul class="details">
+            <li *ngIf="education.date" class="date">Fecha: {{education.date}}</li>
+            <li *ngIf="education.date" class="date">Institucion: {{education.institution}}</li>
+          </ul>
+        </div>
+        <div class="description">
+          <h1 *ngIf="education.degree">{{education.degree}}</h1>
+          <p *ngIf="education.period">{{education.period}}</p>
+        </div>
       </div>
     </div>
   </div>
+  <app-divider></app-divider>
 </div>
 <app-modal [source]="source" [active]="activeModal" title="Educación" [(settings)]="modalSetting"
-  (settingsChange)="onUpdate()"></app-modal>
+  (settingsChange)="onUpdate()" (closeModalEvent)="cancel()"></app-modal>

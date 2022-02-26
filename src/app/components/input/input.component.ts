@@ -17,32 +17,40 @@ export class InputComponent implements OnInit {
   @Input() width: number = 250;
   @Input() maxlenght: string = '100';
   @Output() newValueEvent = new EventEmitter<string>();
+  @Output() valueChange = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit(): void {
-    if (this.value.length*12 < 250) {
-      this.width = 250;
-    } else {
-      this.width = this.value.length*12;
+    if (this.value) {
+      if (this.value.length * 12 < 250) {
+        this.width = 250;
+      } else {
+        this.width = this.value.length * 12;
+      }
     }
   }
 
-  addValue(value: string){
-    if (this.typeNum){
-      this.width = value.length*12+10; 
+  addValue(value: string) {
+    if (this.typeNum) {
+      this.width = value.length * 12 + 10;
       value = value.replace(/[^0-9\.]+/g, '')
-      if (isNaN(parseInt(value))){
+      if (isNaN(parseInt(value))) {
         value = '0'
       } else {
         value = value.replace(/^0+(\d)/, '$1')
       }
     }
-    if(parseInt(value) > 100){
+    if (parseInt(value) > 100) {
       value = '100'
     }
     this.value = value
     this.newValueEvent.emit(value);
+  }
+
+  setDate(): void {
+    console.log(this.value)
+    this.valueChange.emit(this.value)
   }
 
 }

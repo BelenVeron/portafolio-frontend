@@ -23,6 +23,6 @@
       <p *ngIf="personalInformation">{{personalInformation.summary}}</p>
     </div>
   </div>
+  <app-divider></app-divider>
 </div>
-
 <app-modal [source]="source" [active]="activeModal" title="Información profesional" [(settings)]="modalSetting" (settingsChange)="onUpdate()" (closeModalEvent)="cancel()"></app-modal>

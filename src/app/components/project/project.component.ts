@@ -1,22 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { Education } from 'src/app/models/crud/education';
+import { Project } from 'src/app/models/crud/project';
 import { Image } from 'src/app/models/crud/image';
+import { ToastrService } from 'ngx-toastr';
 import { TokenService } from 'src/app/services/auth/token.service';
-import { EducationService } from 'src/app/services/education/education.service';
+import { ProjectService } from 'src/app/services/project/project.service';
 import { ImageUploadService } from 'src/app/services/image-upload/image-upload.service';
 import { UtilService } from 'src/app/services/util/util.service';
 
 @Component({
-  selector: 'app-education',
-  templateUrl: './education.component.html',
-  styleUrls: ['./education.component.css']
+  selector: 'app-project',
+  templateUrl: './project.component.html',
+  styleUrls: ['./project.component.css']
 })
-export class EducationComponent implements OnInit {
+export class ProjectComponent implements OnInit {
 
-  title: string = 'Educación';
+  title: string = 'Proyectos';
   isAdmin: boolean = false;
-  educations: Education[] = [];
+  projects: Project[] = [];
   source: string = '';
   // if no data
   noData: boolean = false;
@@ -31,24 +31,25 @@ export class EducationComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private tokenService: TokenService,
-    private educationService: EducationService,
+    private projectService: ProjectService,
     private imageUploadService: ImageUploadService,
     private util: UtilService
     ) {
       
     }
+
   ngOnInit(): void {
     this.isAdmin = this.tokenService.isAdmin();
     this.getCards();
   }
 
-  // get all the work educations in the database and
-  // assign to this.educations
+  // get all the work projects in the database and
+  // assign to this.projects
   getCards(): void {
-    this.educationService.get().subscribe(
+    this.projectService.get().subscribe(
       data => {
-        this.educations = data;
-        if (this.educations.length === 0) {
+        this.projects = data;
+        if (this.projects.length === 0) {
           this.noData = true
         }
       },
@@ -60,9 +61,9 @@ export class EducationComponent implements OnInit {
     )
   }
 
-  // set modalSetting with Education, to send to modal
+  // set modalSetting with Project, to send to modal
   // and make the element that is need
-  setModalSetting(data: Education): void {
+  setModalSetting(data: Project): void {
     if (!data.image){
       this.source = 'https://res.cloudinary.com/angular-portafolio/image/upload/v1643579687/default/hero_qsmo76.png'
     }else{
@@ -70,17 +71,17 @@ export class EducationComponent implements OnInit {
     }
     this.modalSetting.push({id: data.id});
     this.modalSetting.push({label: 'Imagen', image: true, type: 'square', value: data.image});
-    this.modalSetting.push({label: 'Institución', input: true, type: 'text', value: data.institution});
-    this.modalSetting.push({label: 'Titulo o puesto', input: true, type: 'text',  value: data.degree});
-    this.modalSetting.push({label: 'Fecha', input: true, type: 'text', value: data.date});
-    this.modalSetting.push({label: 'Periodo y detalles', textarea: true, value: data.period});
+    this.modalSetting.push({label: 'Nombre', input: true, value: data.name});
+    this.modalSetting.push({label: 'Descripcion', input: true, value: data.description});
+    this.modalSetting.push({label: 'Fecha', input: true, value: data.date});
+    this.modalSetting.push({label: 'Link', textarea: true, value: data.link});
     console.log(this.modalSetting)
   }
 
-  // if confirm the change in the modal, set the educations
+  // if confirm the change in the modal, set the projects
   // based in the change in modalSetting 
-  setEducation(): Education {
-    let education = new Education(
+  setProject(): Project {
+    let project = new Project(
       this.modalSetting[0].id,
       this.modalSetting[2].value,
       this.modalSetting[3].value,
@@ -88,27 +89,26 @@ export class EducationComponent implements OnInit {
       this.modalSetting[5].value,
       this.modalSetting[1].value
     );
-    this.educations.forEach(element => {
-      if (element.id === education.id) {
-        element.date = education.date;
-        element.degree = education.degree;
-        element.image = education.image;
-        element.institution = education.institution;
-        element.period = education.period;
+    this.projects.forEach(element => {
+      if (element.id === project.id) {
+        element.name = project.name;
+        element.date = project.date;
+        element.description = project.description;
+        element.date = project.date;
+        element.image = project.image;
       }
     });
     this.modalSetting = [];
-    return education;
+    return project;
   }
 
-  openUpdateModal(data: Education): void{
+  openUpdateModal(data: Project): void{
     this.setModalSetting(data);
     this.activeModal = 'active'
   }
 
   cancel(): void {
     this.activeModal = ''
-    this.modalSetting = [];
   }
 
   setNoData(value: boolean) {
@@ -116,7 +116,7 @@ export class EducationComponent implements OnInit {
   }
 
   // set the source in the image of every component in html
-  setSourceImage(data: Education): string{
+  setSourceImage(data: Project): string{
     if (data.image == null) {
       return 'https://res.cloudinary.com/angular-portafolio/image/upload/v1643579687/default/hero_qsmo76.png'
     } else {
@@ -127,7 +127,7 @@ export class EducationComponent implements OnInit {
   async uploadImage(): Promise<void> {
     this.imageUploadService.uploadRemoteUrl(this.source).subscribe(
       data => {
-        this.toastr.success('Education update', 'OK', {
+        this.toastr.success('Project update', 'OK', {
           timeOut: 3000
         });
         this.imageDB;
@@ -142,21 +142,21 @@ export class EducationComponent implements OnInit {
   }
 
   addCard(): void {
-    let experience: Education = new Education(
+    let project: Project = new Project(
       null,
-      'Nueva institucion', 
-      'Titulo', 
+      'Nombre', 
+      'Descripcion', 
       this.util.getToday(), 
-      'Periodo y detalle',
+      'Link',
       null
     );
 
-    this.educationService.save(experience).subscribe(
+    this.projectService.save(project).subscribe(
       data => {
-        this.toastr.success('Education guardado', 'OK', {
+        this.toastr.success('Project guardado', 'OK', {
           timeOut: 3000
         });
-        this.educations.push(data);
+        this.projects.push(data);
         this.noData = false;
       },
       err => {
@@ -170,9 +170,9 @@ export class EducationComponent implements OnInit {
 
 
   onUpdate(): void {
-    this.educationService.update(this.setEducation()).subscribe(
+    this.projectService.save(this.setProject()).subscribe(
       data => {
-        this.toastr.success('Education guardado', 'OK', {
+        this.toastr.success('Project guardado', 'OK', {
           timeOut: 3000
         });
       },
@@ -187,12 +187,12 @@ export class EducationComponent implements OnInit {
   
   delete(id: number | null): void {
     if (id != null) {
-      this.educationService.delete(id).subscribe(
+      this.projectService.delete(id).subscribe(
         data => {
-          this.toastr.success('Education guardado', 'OK', {
+          this.toastr.success('Proyecto eliminado', 'OK', {
             timeOut: 3000
           });
-          this.educations = this.educations.filter(el => el.id !== id);
+          this.projects = this.projects.filter(el => el.id !== id);
         },
         err => {
           console.log('error',err);
@@ -202,6 +202,10 @@ export class EducationComponent implements OnInit {
         }
       ) 
     }
+  }
+
+  goProject(data: string) {
+    window.open(data, "_blank");
   }
 
 }

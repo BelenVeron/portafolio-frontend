@@ -4,13 +4,15 @@
 
 export const environment = {
   production: false, 
-  authURL: 'http://localhost:8080/auth/',
-  personalInformationURL: 'http://localhost:8080/personalInformation/',
-  skillURL: 'http://localhost:8080/skill/',
-  experienceURL: 'http://localhost:8080/workExperience/',
-  educationURL: 'http://localhost:8080/education/',
-  heroURL: 'http://localhost:8080/hero/',
-  socialURL: 'http://localhost:8080/social/',
+  authURL: 'https://app-portfolio-backend-1.herokuapp.com/auth/',
+  personalInformationURL: 'https://app-portfolio-backend-1.herokuapp.com/personalInformation/',
+  skillURL: 'https://app-portfolio-backend-1.herokuapp.com/skill/',
+  experienceURL: 'https://app-portfolio-backend-1.herokuapp.com/workExperience/',
+  educationURL: 'https://app-portfolio-backend-1.herokuapp.com/education/',
+  heroURL: 'https://app-portfolio-backend-1.herokuapp.com/hero/',
+  socialURL: 'https://app-portfolio-backend-1.herokuapp.com/social/',
+  projectURL: 'https://app-portfolio-backend-1.herokuapp.com/project/',
+  imageURL: 'https://app-portfolio-backend-1.herokuapp.com/cloudinary/',
 };
 
 /*
