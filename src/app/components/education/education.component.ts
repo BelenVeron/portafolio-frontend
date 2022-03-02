@@ -72,7 +72,7 @@ export class EducationComponent implements OnInit {
     this.modalSetting.push({label: 'Imagen', image: true, type: 'square', value: data.image});
     this.modalSetting.push({label: 'Institución', input: true, type: 'text', value: data.institution});
     this.modalSetting.push({label: 'Titulo o puesto', input: true, type: 'text',  value: data.degree});
-    this.modalSetting.push({label: 'Fecha', input: true, type: 'text', value: data.date});
+    this.modalSetting.push({label: 'Fecha', input: true, type: 'date', value: data.date});
     this.modalSetting.push({label: 'Periodo y detalles', textarea: true, value: data.period});
     console.log(this.modalSetting)
   }
@@ -124,22 +124,6 @@ export class EducationComponent implements OnInit {
     }
   }
 
-  async uploadImage(): Promise<void> {
-    this.imageUploadService.uploadRemoteUrl(this.source).subscribe(
-      data => {
-        this.toastr.success('Education update', 'OK', {
-          timeOut: 3000
-        });
-        this.imageDB;
-      },
-      err => {
-        console.log('error',err);
-        this.toastr.error(err.error.message, 'Fail', {
-          timeOut: 3000
-        }); 
-      }
-    );
-  }
 
   addCard(): void {
     let experience: Education = new Education(
@@ -170,11 +154,12 @@ export class EducationComponent implements OnInit {
 
 
   onUpdate(): void {
-    this.educationService.update(this.setEducation()).subscribe(
+    this.educationService.save(this.setEducation()).subscribe(
       data => {
         this.toastr.success('Education guardado', 'OK', {
           timeOut: 3000
         });
+        
       },
       err => {
         console.log('error',err);

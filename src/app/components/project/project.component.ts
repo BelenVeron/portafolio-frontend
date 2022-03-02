@@ -49,6 +49,7 @@ export class ProjectComponent implements OnInit {
     this.projectService.get().subscribe(
       data => {
         this.projects = data;
+        console.log(this.projects)
         if (this.projects.length === 0) {
           this.noData = true
         }
@@ -109,6 +110,7 @@ export class ProjectComponent implements OnInit {
 
   cancel(): void {
     this.activeModal = ''
+    this.modalSetting = []
   }
 
   setNoData(value: boolean) {
@@ -122,23 +124,6 @@ export class ProjectComponent implements OnInit {
     } else {
       return data.image.imageUrl;
     }
-  }
-
-  async uploadImage(): Promise<void> {
-    this.imageUploadService.uploadRemoteUrl(this.source).subscribe(
-      data => {
-        this.toastr.success('Project update', 'OK', {
-          timeOut: 3000
-        });
-        this.imageDB;
-      },
-      err => {
-        console.log('error',err);
-        this.toastr.error(err.error.message, 'Fail', {
-          timeOut: 3000
-        }); 
-      }
-    );
   }
 
   addCard(): void {
@@ -182,7 +167,7 @@ export class ProjectComponent implements OnInit {
           timeOut: 3000
         }); 
       }
-    ) 
+    )  
   }
   
   delete(id: number | null): void {

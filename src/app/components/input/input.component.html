@@ -1,14 +1,12 @@
-<input
-    *ngIf="type !== 'date'"
-    [class]="classInput" 
-    [placeholder]="placeholder" 
-    [type]="type" 
-    #newValue 
-    (keyup)="addValue(newValue.value)"
-    [required]="required"
-    [disabled]="disabled"
-    [value]="value"
-    [attr.maxlength]="maxlenght"
-    [ngStyle]="{'width.px': width}"
-    [(ngModel)]="value"
-/>
+<input *ngIf="type !== 'date'" [class]="classInput" [placeholder]="placeholder" [type]="type" #newValue
+    (keyup)="addValue(newValue.value)" [required]="required" [disabled]="disabled" [value]="value"
+    [attr.maxlength]="maxlenght" [ngStyle]="{'width.px': width}" [(ngModel)]="value" />
+
+<div class="container" *ngIf="type === 'date'">
+    <input matInput [matDatepicker]="picker" [class]="classInput" [placeholder]="value" [type]="'text'"
+    [required]="required" [disabled]="disabled" [value]="value"
+    [attr.maxlength]="maxlenght" [ngStyle]="{'width.px': width}" 
+    [(ngModel)]="value" (ngModelChange)="sendValue()"/>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</div>

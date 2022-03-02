@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Image } from 'src/app/models/crud/image';
-import { ImageDto } from 'src/app/models/crud/image-dto';
 import { ImageUploadService } from 'src/app/services/image-upload/image-upload.service';
 
 @Component({
@@ -83,13 +82,7 @@ export class ModalComponent implements OnInit {
   setSettingsSource(data: any): void {
     this.settings.forEach(element => {
       if (element.image){
-        if (element.value) {
-          element.value.name = data.name;
-          element.value.imageUrl = data.imageUrl;
-          element.value.imageId = data.imageId;
-        }else{
           element.value = data;
-        }
       }
     });
   }

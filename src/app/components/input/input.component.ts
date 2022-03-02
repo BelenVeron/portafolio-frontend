@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
@@ -12,14 +13,14 @@ export class InputComponent implements OnInit {
   @Input() disabled: boolean = false;
   @Input() classInput: string = 'form-input';
   @Input() type: string = '';
-  @Input() value: string = '';
+  @Input() value: string | null = '';
   @Input() placeholder: string = '';
   @Input() width: number = 250;
   @Input() maxlenght: string = '100';
   @Output() newValueEvent = new EventEmitter<string>();
   @Output() valueChange = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     if (this.value) {
@@ -48,9 +49,11 @@ export class InputComponent implements OnInit {
     this.newValueEvent.emit(value);
   }
 
-  setDate(): void {
-    console.log(this.value)
-    this.valueChange.emit(this.value)
+  sendValue(): void {
+    this.value = this.datePipe.transform(this.value, 'dd-MM-yyyy');
+    if (this.value !== null) {
+      this.valueChange.emit(this.value)
+    }
   }
 
 }

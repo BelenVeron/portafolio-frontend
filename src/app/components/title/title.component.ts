@@ -10,6 +10,8 @@ export class TitleComponent implements OnInit {
   @Input() title: string = 'Title'
   @Input() type: string = 'swoosh'
   @Input() fontSize: string = 'swoosh'
+  @Input() titleType: string = 'swoosh'
+
 
   constructor() { }
 

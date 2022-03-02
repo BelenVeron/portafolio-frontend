@@ -52,9 +52,6 @@ export class HeroComponent implements OnInit {
       setInterval(()=>{this.setAnimation()}, 5000);
     }
     this.isAdmin = this.tokenService.isAdmin();
-  }
-
-  ngAfterViewInit(): void {
     this.getHero();
   }
 
@@ -66,23 +63,6 @@ export class HeroComponent implements OnInit {
       this.animation = '';
       this.activeAnimation = true;
     }
-  }
-
-  async uploadImage(): Promise<void> {
-    this.imageUploadService.uploadRemoteUrl(this.source).subscribe(
-      data => {
-        this.toastr.success('hero update', 'OK', {
-          timeOut: 3000
-        });
-        this.imageDB;
-      },
-      err => {
-        console.log('error',err);
-        this.toastr.error(err.error.message, 'Fail', {
-          timeOut: 3000
-        }); 
-      }
-    );
   }
 
   // set modalSetting with hero, to send to modal
@@ -132,6 +112,7 @@ export class HeroComponent implements OnInit {
     this.heroService.get().subscribe(
       data => {
         this.hero = data;
+        console.log(this.hero)
         this.setSource(this.hero);
         if (this.hero !== null && this.hero.image) {
           this.getImageDB(this.hero.image.id);
@@ -171,7 +152,8 @@ export class HeroComponent implements OnInit {
       this.heroService.save(this.hero).subscribe(
         data => {
           // set source to the image
-          this.setSource(this.hero);
+          this.setSource(data);
+          console.log('Update: '+ data)
           this.toastr.success('hero update', 'OK', {
             timeOut: 3000
           });

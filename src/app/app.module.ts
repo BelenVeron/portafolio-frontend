@@ -36,7 +36,23 @@ import { TitleComponent } from './components/title/title.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SocialMediaComponent } from './components/social-media/social-media.component';
 import { ProjectComponent } from './components/project/project.component';
+import { MatSliderModule } from '@angular/material/slider';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
 
+export const DATE_FORMAT = {
+  parse: {
+      dateInput: 'DD-MM-YYYY',
+  },
+  display: {
+      dateInput: 'DD-MM-YYYY',
+      monthYearLabel: 'MMM YYYY',
+      dateA11yLabel: 'LL',
+      monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,11 +89,16 @@ import { ProjectComponent } from './components/project/project.component';
     ToastrModule.forRoot(),
     FontAwesomeModule,
     NgxSpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSliderModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMomentDateModule
   ],
   providers: [
     interceptorProvider,
     DatePipe,
+    { provide: MAT_DATE_FORMATS, useValue: DATE_FORMAT }
   ],
   bootstrap: [AppComponent]
 })
