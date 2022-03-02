@@ -49,6 +49,7 @@
 	left: 50%;
 	transform: translate(-50%,-50%);
 	border-radius: 5px;
+	width: 600px;
 }
  
 .wrapper .modal_box .modal_box_wrap .modal_close{

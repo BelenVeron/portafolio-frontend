@@ -25,7 +25,7 @@
 					</app-input>
 
 					<app-textarea *ngIf="setting.textarea" [ngStyle]="{'margin-top.px':10}" [value]="setting.value"
-						(newValueEvent)="addValue($event, setting.value)"></app-textarea>
+						(newValueEvent)="addValue($event, setting.value)" [cols]="50"></app-textarea>
 				</div>
 			</div>
 			<div class="modal_footer">
