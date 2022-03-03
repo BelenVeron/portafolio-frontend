@@ -4,18 +4,12 @@ const path = require('path');
 
 const app = express();
 
-// Static files
-app.use(
-    express.static(path.join(__dirname, '../client/dist/portafolio-frontend'), {
-        maxAge: '1y',
-    })
+// Serve only the static files form the dist directory
+app.use(express.static('./dist/portafolio-frontend'));
+
+app.get('/*', (req, res) =>
+    res.sendFile('index.html', {root: 'dist/portafolio-frontend/'}),
 );
-// Angular app
-app.get('*', (req, res) => {
-    res.sendFile(
-        path.join(__dirname, '../client/dist/portafolio-frontend/index.html')
-    );
-});
 
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8080);
