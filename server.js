@@ -6,14 +6,14 @@ const app = express();
 
 // Static files
 app.use(
-    express.static(path.join(__dirname, '../client/dist/angular-portafolio-frontend'), {
+    express.static(path.join(__dirname, '../client/dist/portafolio-frontend'), {
         maxAge: '1y',
     })
 );
 // Angular app
 app.get('*', (req, res) => {
     res.sendFile(
-        path.join(__dirname, '../client/dist/angular-portafolio-frontend/index.html')
+        path.join(__dirname, '../client/dist/portafolio-frontend/index.html')
     );
 });
 
