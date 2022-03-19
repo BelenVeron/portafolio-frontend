@@ -182,7 +182,7 @@ export class AboutComponent implements OnInit {
   onUpdate(): void {
     this.setPersonalInformation();
     console.log(this.modalSetting[1].value)
-    /* if (this.personalInformation != null) {
+    if (this.personalInformation != null) {
       this.personalInformationService.save(this.personalInformation).subscribe(
         data => {
           // set source to the image
@@ -198,7 +198,7 @@ export class AboutComponent implements OnInit {
           });
         }
       ) 
-    } */
+    } 
     // close the modal, and set the active property
     this.activeModal = ''
   }
